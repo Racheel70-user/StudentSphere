@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Leave | Stud</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+   
+    <link rel="stylesheet" href="faculty-portal.css">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+</head>
+
+<style>
+     .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 30px;
+            font: 700 22px/1 "Outfit", sans-serif;
+            letter-spacing: -.6px;
+            color: #fff;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            box-shadow: 0 7px 22px rgba(59, 130, 246, .36);
+            color: #071019;
+            font-size: 16px;
+        }
+
+        .toast-msg {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            z-index: 1100;
+            transform: translate(-50%, 20px);
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: #111b2e;
+            border: 1px solid rgba(52, 211, 153, .35);
+            color: #34d399;
+            font: 600 12px "DM Sans", sans-serif;
+            box-shadow: 0 15px 40px #0008;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        
+        body { overflow-x: hidden; }
+
+        .profile-button,
+        .profile-menu-item {
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: none;
+            outline: 0;
+            cursor: pointer;
+        }
+
+        .profile-menu-item {
+            border: 0;
+            background: transparent;
+        }
+
+        .side {
+            width: 270px;
+            height: auto;
+            top: 0;
+            bottom: 0;
+            padding: 24px 15px 18px;
+        }
+
+        .main {
+            margin-left: 270px;
+            padding: 24px 28px 28px;
+        }
+
+        .side .bottom .button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            color: #fca5a5;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            background: rgba(30, 41, 59, .58);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .side .bottom .button:hover {
+            background: rgba(251, 113, 133, .12);
+            border-color: rgba(251, 113, 133, .4);
+        }
+
+
+        textarea {
+            resize: none;
+        }
+
+    
+        .card h2 {
+            margin-top: 0;
+        }
+</style>
+<body>
+
+    <div class="app">
+
+        
+        <aside class="side">
+
+             <div class="brand">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            Stud
+        </div>
+        <nav class="sidebar-nav">
+
+                <a class="nav-link " href="faculty-portal-secure.html">
+                    <span class="ico">▦</span>
+                    <span>Home Page</span>
+                </a>
+
+                <a class="nav-link" href="mark-attendance-secure.html">
+                    <span class="ico">▥</span>
+                    <span>Student Attendance</span>
+                </a>
+
+                <a class="nav-link" href="review-grading-secure.html">
+                    <span class="ico">♜</span>
+                    <span>Student Grade</span>
+                </a>
+
+                <a class="nav-link" href="create-assessment-secure.html">
+                    <span class="ico">＋</span>
+                    <span>Create Assessment</span>
+                </a>
+
+                <a class="nav-link" href="notes-lectures-secure.html">
+                    <span class="ico">▤</span>
+                    <span>Notes & Lectures</span>
+                </a>
+
+                
+
+                <a class="nav-link active" href="apply-leave-secure.html">
+                    <span class="ico">▱</span>
+                    <span>Leave </span>
+                </a>
+
+            </nav>
+
+            <div class="bottom">
+                <button class="button" onclick="signOut()">
+                     &nbsp; Sign Out
+                </button>
+            </div>
+
+        </aside>
+
+        <main class="main">
+
+            <header class="top">
+
+                <div class="crumb">
+                    <b>Apply for Leave</b>
+                </div>
+
+                  <div class="header-actions">
+        <button class="profile-button" id="profileMenuToggle" aria-expanded="false" aria-controls="profileDropdown">
+          <div class="avatar" data-faculty-initials>--</div>
+          <span data-faculty-name>Loading...</span>
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown" aria-label="Profile menu">
+          <button class="profile-menu-item" type="button" id="myProfile">
+            <i class="bi bi-person"></i>My Profile
+          </button>
+          <div class="profile-menu-divider"></div>
+          <button class="profile-menu-item danger" type="button" id="profileLogout" onclick="signOut()">
+            <i class="bi bi-box-arrow-right"></i>Logout
+          </button>
+        </div>
+</div>
+
+            </header>
+
+            <section class="heading">
+
+                <div>
+                    <h1>Apply for Leave</h1>
+                    
+                </div>
+
+            </section>
+
+            
+            <section class="grid">
+
+              
+                <article class="card form-card">
+
+                    <h2>Leave Request</h2>
+
+                    <div class="fields">
+
+                        <div class="field">
+                            <label>Leave Type</label>
+
+                            <select>
+                                <option>Non Earned Leave</option>
+                                <option>Earned Leave</option>
+                                <option>Academic Duty</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Duration</label>
+
+                            <select>
+                                <option>Full Day</option>
+                               
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>From Date</label>
+                            <input type="date">
+                        </div>
+
+                        <div class="field">
+                            <label>To Date</label>
+                            <input type="date">
+                        </div>
+
+                    </div>
+
+                    <div class="field" style="margin-top:17px;">
+
+                        <label>Reason for Leave</label>
+
+                        <textarea
+                            rows="4"
+                            placeholder="Briefly state the reason for the request.">
+                        </textarea>
+
+                    </div>
+
+                    
+
+                    <div class="actions">
+
+                        <button class="secondary" id="cancelLeaveBtn">
+                            Cancel
+                        </button>
+
+                        <button class="button" id="submitLeaveBtn">
+                            Submit Request
+                        </button>
+
+                    </div>
+
+                </article>
+
+              
+                <aside class="stack">
+
+                    <article class="card">
+
+                        <h2>Your Leave Balance</h2>
+
+                        <div class="metric">
+                            <b>18 Days</b>
+                            <small>Casual Leave Available</small>
+                        </div>
+
+                        <div class="metric">
+                            <b>9 Days</b>
+                            <small>Earned Leave Available</small>
+                        </div>
+
+                        <div class="metric">
+                            <b>5 Days</b>
+                            <small>Academic Duty Available</small>
+                        </div>
+
+                    </article>
+
+                </aside>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    
+    <div class="toast-msg" id="taskToast">✓ Leave request submitted</div>
+
+   
+    <script src="faculty-auth.js"></script>
+
+    <script>
+        fillFaculty();
+
+        var toast = document.getElementById("taskToast");
+        var toastTimer;
+
+        function showToast(text) {
+            toast.textContent = "✓ " + text;
+            toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(function () {
+                toast.classList.remove("show");
+            }, 2600);
+        }
+
+        document.getElementById("submitLeaveBtn").addEventListener("click", function () {
+            showToast("Leave request submitted");
+        });
+
+        document.getElementById("cancelLeaveBtn").addEventListener("click", function () {
+            showToast("Leave request cancelled");
+        });
+    </script>
+
+</body>
+
+</html>
+

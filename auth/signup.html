@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stud - Signup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+<div class="signup-container">
+    <div class="signup-card">
+        <h1>Signup Form</h1>
+        <form id="signupForm" class="signup-form">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Name</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.4 0-8 2.5-8 5.5V22h16v-2.5c0-3-3.6-5.5-8-5.5Z"/></svg>
+                        </span>
+                        <input type="text" id="name" placeholder="Enter your name" autocomplete="name">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 4.2V18h16V8.2l-8 5.1-8-5.1ZM20 6H4l8 5 8-5Z"/></svg>
+                        </span>
+                        <input type="email" id="email" placeholder="Enter your Gmail address" autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.1-.2 11 11 0 0 0 3.5 1.1 1 1 0 0 1 .9 1V20a1 1 0 0 1-1.1 1C10.8 21 3 13.2 3 3.1A1 1 0 0 1 4 2h2.9a1 1 0 0 1 1 1 11 11 0 0 0 1.1 3.5 1 1 0 0 1-.2 1.1L6.6 10.8Z"/></svg>
+                        </span>
+                        <input type="tel" id="phoneNumber" placeholder="10 digit phone number" autocomplete="tel">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Date of Birth</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v12A2.5 2.5 0 0 1 19.5 21h-15A2.5 2.5 0 0 1 2 18.5v-12A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 7h-15v9.5h15V9Z"/></svg>
+                        </span>
+                        <input type="date" id="dob" autocomplete="bday">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>College Name</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7v2h20V7L12 2Zm-7 9v9H3v2h18v-2h-2v-9h-2v9h-3v-9H9v9H6v-9H5Zm4 0v9h6v-9H9Z"/></svg>
+                        </span>
+                        <input type="text" id="collegeName" placeholder="College name">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Address</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg>
+                        </span>
+                        <input type="text" id="address" placeholder="Address">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v13h14V9h-2ZM9 7a3 3 0 0 1 6 0v2H9V7Zm3 12a2 2 0 0 1-1-3.74V15a1 1 0 0 1 2 0v.26A2 2 0 0 1 12 19Z"/></svg>
+                        </span>
+                        <input type="password" id="password" placeholder="Enter your password" autocomplete="new-password">
+                        <button type="button" class="eye" id="passwordEye" aria-label="Show password">
+                            <svg class="eye-icon eye-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5c5.5 0 9.7 4 11 7-1.3 3-5.5 7-11 7S2.3 15 1 12c1.3-3 5.5-7 11-7Zm0 2C7.9 7 4.6 9.8 3.2 12 4.6 14.2 7.9 17 12 17s7.4-2.8 8.8-5C19.4 9.8 16.1 7 12 7Zm0 1.5A3.5 3.5 0 1 1 12 16a3.5 3.5 0 0 1 0-7Z"/></svg>
+                            <svg class="eye-icon eye-closed" viewBox="0 0 24 24" aria-hidden="true"><path d="m3.3 2.7 18 18-1.4 1.4-3.1-3.1A11.8 11.8 0 0 1 12 19c-5.5 0-9.7-4-11-7a15.5 15.5 0 0 1 4-4.9L1.9 4.1 3.3 2.7Zm8.7 4.8A3.5 3.5 0 0 1 15.5 13l-5.8-5.8A3.4 3.4 0 0 1 12 7.5Zm0-2C7.9 5.5 4.6 8.3 3.2 10.5c.5.8 1.3 1.7 2.3 2.5l1.6-1.6A3.5 3.5 0 0 1 9 8.8l1.6-1.6c.5-.1 1-.2 1.4-.2Zm0 13c4.1 0 7.4-2.8 8.8-5-.7-1.1-1.8-2.4-3.4-3.5l-1.5 1.5A3.5 3.5 0 0 1 13 15.8l-1.8 1.8c.3 0 .5.1.8.1Z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <div class="input-box">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v13h14V9h-2ZM9 7a3 3 0 0 1 6 0v2H9V7Zm3 12a2 2 0 0 1-1-3.74V15a1 1 0 0 1 2 0v.26A2 2 0 0 1 12 19Z"/></svg>
+                        </span>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" autocomplete="new-password">
+                        <button type="button" class="eye" id="confirmEye" aria-label="Show password">
+                            <svg class="eye-icon eye-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5c5.5 0 9.7 4 11 7-1.3 3-5.5 7-11 7S2.3 15 1 12c1.3-3 5.5-7 11-7Zm0 2C7.9 7 4.6 9.8 3.2 12 4.6 14.2 7.9 17 12 17s7.4-2.8 8.8-5C19.4 9.8 16.1 7 12 7Zm0 1.5A3.5 3.5 0 1 1 12 16a3.5 3.5 0 0 1 0-7Z"/></svg>
+                            <svg class="eye-icon eye-closed" viewBox="0 0 24 24" aria-hidden="true"><path d="m3.3 2.7 18 18-1.4 1.4-3.1-3.1A11.8 11.8 0 0 1 12 19c-5.5 0-9.7-4-11-7a15.5 15.5 0 0 1 4-4.9L1.9 4.1 3.3 2.7Zm8.7 4.8A3.5 3.5 0 0 1 15.5 13l-5.8-5.8A3.4 3.4 0 0 1 12 7.5Zm0-2C7.9 5.5 4.6 8.3 3.2 10.5c.5.8 1.3 1.7 2.3 2.5l1.6-1.6A3.5 3.5 0 0 1 9 8.8l1.6-1.6c.5-.1 1-.2 1.4-.2Zm0 13c4.1 0 7.4-2.8 8.8-5-.7-1.1-1.8-2.4-3.4-3.5l-1.5 1.5A3.5 3.5 0 0 1 13 15.8l-1.8 1.8c.3 0 .5.1.8.1Z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="password-info">Password must contain 8+ characters, uppercase, lowercase, number, and special character.</div>
+            <div id="message"></div>
+            <button type="submit" class="signup-btn">Signup</button>
+            <div class="login-link">Already have an account? <a href="index.html">Back to Login</a></div>
+        </form>
+    </div>
+</div>
+
+<script>
+function setEyeState(button, visible) {
+    button.classList.toggle("is-visible", visible);
+}
+
+function togglePassword(inputId, buttonId) {
+    const input = document.getElementById(inputId);
+    const button = document.getElementById(buttonId);
+    const hidden = input.type === "password";
+    input.type = hidden ? "text" : "password";
+    setEyeState(button, hidden);
+    button.setAttribute("aria-label", hidden ? "Hide password" : "Show password");
+}
+
+document.getElementById("passwordEye").addEventListener("click", () => togglePassword("password", "passwordEye"));
+document.getElementById("confirmEye").addEventListener("click", () => togglePassword("confirmPassword", "confirmEye"));
+
+document.getElementById("signupForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const message = document.getElementById("message");
+    message.className = "";
+    message.textContent = "";
+
+    const dobValue = document.getElementById("dob").value;
+    const [year, month, day] = dobValue.split("-");
+
+    const payload = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim().toLowerCase(),
+        phoneNumber: document.getElementById("phoneNumber").value.trim(),
+        dob: dobValue ? `${day}/${month}/${year}` : "",
+        collegeName: document.getElementById("collegeName").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        password: document.getElementById("password").value,
+        confirmPassword: document.getElementById("confirmPassword").value
+    };
+
+    if (!dobValue) {
+        message.textContent = "Please choose your date of birth.";
+        message.className = "error";
+        return;
+    }
+
+    if (!/^[A-Za-z ]+$/.test(payload.name)) {
+        message.textContent = "Name can contain letters and spaces only.";
+        message.className = "error";
+        return;
+    }
+    if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(payload.email)) {
+        message.textContent = "Please enter a valid Gmail address.";
+        message.className = "error";
+        return;
+    }
+    if (!/^\d{10}$/.test(payload.phoneNumber)) {
+        message.textContent = "Phone number must be exactly 10 digits.";
+        message.className = "error";
+        return;
+    }
+    if (payload.password.length < 8 || !/[A-Z]/.test(payload.password) || !/[a-z]/.test(payload.password) || !/[0-9]/.test(payload.password) || !/[^A-Za-z0-9]/.test(payload.password)) {
+        message.textContent = "Password must meet the full strength requirements.";
+        message.className = "error";
+        return;
+    }
+    if (payload.password !== payload.confirmPassword) {
+        message.textContent = "Passwords do not match.";
+        message.className = "error";
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:3000/api/auth/student-signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            message.textContent = data.message || "Signup failed.";
+            message.className = "error";
+            return;
+        }
+        message.textContent = `Signup successful. Your Student ID is ${data.studentId}.`;
+        message.className = "success";
+        document.getElementById("signupForm").reset();
+    } catch (error) {
+        message.textContent = "Unable to reach the server right now.";
+        message.className = "error";
+    }
+});
+</script>
+</body>
+</html>

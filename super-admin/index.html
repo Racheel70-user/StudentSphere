@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stud ERP | Super Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="javascript:void(0)" id="brandLink">
+            <span class="brand-mark">
+                <i class="bi bi-mortarboard-fill"></i>
+            </span>
+            <span class="brand-text">
+                <b>Stud</b>
+                
+            </span>
+        </a>
+     
+        <nav class="nav-list" id="navList">
+            <a class="nav-link active" href="/super-admin/index.html" data-module="Dashboard">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-link" href="/shared/AdminStudentPage.html" data-module="Students & Admissions">
+                <i class="bi bi-people"></i>
+                <span>Students &amp; Admissions</span>
+            </a>
+            <a class="nav-link" href="/faculty/index.html" data-module="Teachers">
+                <i class="bi bi-person-workspace"></i>
+                <span>Teachers</span>
+            </a>
+            <a class="nav-link" href="/courses/index.html" data-module="Courses">
+                <i class="bi bi-book"></i>
+                <span>Courses</span>
+            </a>
+            <a class="nav-link" href="/fees/index.html" data-module="Fees">
+                <i class="bi bi-wallet2"></i>
+                <span>Fees</span>
+            </a>
+            <a class="nav-link" href="/reports/index.html" data-module="Reports">
+                <i class="bi bi-bar-chart"></i>
+                <span>Reports</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="dashboard-shell">
+
+        <header class="top-header">
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="header-left">
+                <h1 id="dashboardTitle">Admin Dashboard</h1>
+            </div>
+            <div class="header-right">
+
+                <div class="branch-dropdown">
+                    <button class="branch-select-button" id="branchSelectButton" type="button">
+                        <span class="branch-select-left">
+                            <i class="bi bi-diagram-3"></i>
+                            <span id="selectedBranchText">All Branches</span>
+                        </span>
+                        <i class="bi bi-chevron-down branch-chevron"></i>
+                    </button>
+                    <div class="branch-menu" id="branchMenu">
+                        <button class="branch-option selected" data-branch="all">
+                            <i class="bi bi-buildings"></i>
+                            <span>All Branches</span>
+                        </button>
+                        <button class="branch-option" data-branch="nashik">
+                            <i class="bi bi-building"></i>
+                            <span>Nashik Branch</span>
+                        </button>
+                        <button class="branch-option" data-branch="dhule">
+                            <i class="bi bi-building"></i>
+                            <span>Dhule Branch</span>
+                        </button>
+                        <button class="branch-option" data-branch="pune">
+                            <i class="bi bi-building"></i>
+                            <span>Pune Branch</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="date-range-wrap">
+                    <button class="date-button" id="dateRangeButton" type="button">
+                        <i class="bi bi-calendar3"></i>
+                        <span id="dateRangeText">01 May 2026 – 31 May 2026</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="date-range-menu" id="dateRangeMenu">
+                        <div class="date-range-title">Select Date Range</div>
+                        <div class="date-input-grid">
+                            <label>From <input type="date" id="dateFrom" value="2026-05-01"></label>
+                            <label>To <input type="date" id="dateTo" value="2026-05-31"></label>
+                        </div>
+                        <div class="date-range-actions">
+                            <button type="button" id="dateCancel">Cancel</button>
+                            <button type="button" id="dateApply">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown-wrap">
+                    <button class="profile-button" id="profileToggle" type="button">
+                        <span class="profile-avatar">SA</span>
+                        <span class="profile-text">
+                            <b>Super Admin</b>
+                            <small>Administrator</small>
+                        </span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="profile-menu" id="profileMenu">
+                        <button type="button" id="myProfile"><i class="bi bi-person"></i> My Profile</button>
+                        <button type="button" id="profileLogout"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <div class="dashboard-content" id="dashboardContent">
+
+            <section class="kpi-grid" id="kpiGrid"></section>
+
+            <section class="chart-grid">
+                <article class="panel chart-card">
+                    <div class="panel-title">
+                        <h2 id="growthTitle">Student Growth (All Branches)</h2>
+                    </div>
+                    <div class="chart-legend" id="growthLegend"></div>
+                    <div class="line-chart" id="growthChart"></div>
+                </article>
+                <article class="panel chart-card">
+                    <div class="panel-title">
+                        <h2 id="revenueTitle">Revenue Overview (All Branches)</h2>
+                    </div>
+                    <div class="chart-legend" id="revenueLegend"></div>
+                    <div class="line-chart" id="revenueChart"></div>
+                </article>
+                <article class="panel branch-panel" id="branchPanel"></article>
+            </section>
+
+            <section class="summary-grid">
+                <article class="panel snapshot-panel" id="snapshotPanel"></article>
+                <article class="panel exam-panel" id="examPanel"></article>
+                <article class="panel alerts-panel" id="alertsPanel"></article>
+            </section>
+
+            <section class="lower-grid">
+                <article class="panel activities-panel">
+                    <div class="panel-title">
+                        <h2>Recent Activities</h2>
+                        <button class="text-button" id="viewAllActivities" type="button">View All</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table id="activitiesTable">
+                            <thead id="activitiesHead"></thead>
+                            <tbody id="activitiesBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="activities-footer" id="activitiesFooter"></div>
+                </article>
+
+                <article class="panel courses-panel">
+                    <div class="panel-title">
+                        <h2 id="coursesTitle">Top Courses</h2>
+                    </div>
+                    <div class="course-head">
+                        <span>Course</span>
+                        <span>Total Students</span>
+                    </div>
+                    <div id="coursesList" class="course-list"></div>
+                </article>
+
+                <article class="panel quick-panel">
+                    <div class="panel-title">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="quick-grid">
+                        <button class="quick blue" data-toast="Add Branch selected">
+                            <i class="bi bi-building-add"></i>
+                            <span>Add Branch</span>
+                        </button>
+                        <button class="quick orange" data-toast="Create Notice selected">
+                            <i class="bi bi-megaphone"></i>
+                            <span>Create Notice</span>
+                        </button>
+                        <button class="quick cyan" data-toast="Generate Report selected">
+                            <i class="bi bi-file-earmark-bar-graph"></i>
+                            <span>Generate Report</span>
+                        </button>
+                        <button class="quick violet" data-toast="Manage Users selected">
+                            <i class="bi bi-person-gear"></i>
+                            <span>Manage Users</span>
+                        </button>
+                    </div>
+                </article>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Activities Modal -->
+    <div class="activities-modal" id="activitiesModal">
+        <div class="activities-modal-card">
+            <div class="activities-modal-header">
+                <div>
+                    <h2>All Recent Activities</h2>
+                    <p>Complete administrative activity log</p>
+                </div>
+                <button id="activitiesModalClose" class="modal-close"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="activities-modal-body">
+                <div class="table-wrap">
+                    <table>
+                        <thead id="modalActivitiesHead"></thead>
+                        <tbody id="modalActivitiesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="activities-modal-footer">
+                <button id="activitiesModalExit"><i class="bi bi-box-arrow-left"></i> Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="toastText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

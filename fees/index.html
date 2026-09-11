@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stud - Fee Sections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-shell">
+        <main class="portal-main">
+            <section class="role-intro-card">
+                <h2><i class="fas fa-graduation-cap"></i> Fee Sections</h2>
+                <p>Choose the fee page you want to open.</p>
+            </section>
+
+            <div class="cards" style="margin-top:20px;">
+                <a class="card" href="faculty-fee.html" style="text-decoration:none;color:inherit;">
+                    <div class="card-info"><h3>Faculty Fee Section</h3><p>Open faculty fee tools</p></div>
+                </a>
+                <a class="card" href="principal-fee.html" style="text-decoration:none;color:inherit;">
+                    <div class="card-info"><h3>Principal Fee Section</h3><p>Open principal overview</p></div>
+                </a>
+                <a class="card" href="student-fee.html" style="text-decoration:none;color:inherit;">
+                    <div class="card-info"><h3>Student Fee Section</h3><p>Open student fee history</p></div>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+<script>
+    (() => {
+        try {
+            const raw = sessionStorage.getItem('studSession') || localStorage.getItem('studSession');
+            const session = raw ? JSON.parse(raw) : null;
+            if (session && session.role === 'student') {
+                window.location.replace('student-fee.html');
+            }
+        } catch (_) {}
+    })();
+</script>
+</html>

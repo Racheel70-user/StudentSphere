@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stud - Attendance Reports</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+       <div class="brand">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            Stud
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin-dashboard/index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/shared/AdminStudentPage.html" class="nav-link">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="/faculty/index.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Faculty</span>
+            </a>
+
+            <a href="/courses/index.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Courses</span>
+            </a>
+
+            <a href="/fees/index.html" class="nav-link">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Fees</span>
+            </a>
+
+            <a href="/reports/index.html" class="nav-link active">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="page-heading">
+
+                <h1>
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Attendance Reports
+                </h1>
+
+                <p>
+                    Generate and manage student attendance reports
+                </p>
+
+            </div>
+
+            <!-- PROFILE -->
+            <div class="profile-area"
+                 id="profileArea"
+                 tabindex="0">
+
+                <div class="profile-image">Y</div>
+
+                <div class="profile-details">
+                    <strong>Yash Puri</strong>
+                    <span>Administrator</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-down profile-arrow"></i>
+
+                <div class="profile-dropdown"
+                     id="profileDropdown">
+
+                    <button type="button" id="profileOption">
+                        <i class="fa-solid fa-user"></i>
+                        Profile
+                    </button>
+
+                    <div class="profile-menu-divider"></div>
+
+                    <button type="button" id="logoutOption">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- CONTENT -->
+        <section class="content">
+
+            <!-- SUMMARY CARDS -->
+            <div class="summary-cards">
+
+                <div class="summary-card">
+
+                    <div class="card-icon blue">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+
+                    <div class="card-info">
+                        <span>Total Reports</span>
+                        <h2 id="totalReports">0</h2>
+                        <small>All generated reports</small>
+                    </div>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <div class="card-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div class="card-info">
+                        <span>Ready Reports</span>
+                        <h2 id="readyReports">0</h2>
+                        <small>Available reports</small>
+                    </div>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <div class="card-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div class="card-info">
+                        <span>Pending Reports</span>
+                        <h2 id="pendingReports">0</h2>
+                        <small>Reports under process</small>
+                    </div>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <div class="card-icon purple">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+
+                    <div class="card-info">
+                        <span>Students Covered</span>
+                        <h2 id="studentsCovered">0</h2>
+                        <small>Unique students</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- REPORT GENERATOR -->
+            <div class="attendance-generator">
+
+                <div class="generator-header">
+
+                    <div>
+                        <h2>
+                            <i class="fa-solid fa-chart-column"></i>
+                            Generate Attendance Report
+                        </h2>
+
+                        <p>
+                            Select students, branch and attendance period
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- REPORT SCOPE -->
+                <div class="scope-section">
+
+                    <label class="section-label">
+                        Report Scope
+                    </label>
+
+                    <div class="scope-options">
+
+                        <label class="scope-option">
+
+                            <input type="radio"
+                                   name="reportScope"
+                                   value="student"
+                                   checked>
+
+                            <span class="scope-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+
+                            <span>
+                                <strong>Particular Student</strong>
+                                <small>Generate report for one student</small>
+                            </span>
+
+                        </label>
+
+                        <label class="scope-option">
+
+                            <input type="radio"
+                                   name="reportScope"
+                                   value="selective">
+
+                            <span class="scope-icon">
+                                <i class="fa-solid fa-user-group"></i>
+                            </span>
+
+                            <span>
+                                <strong>Selective Students</strong>
+                                <small>Select multiple students</small>
+                            </span>
+
+                        </label>
+
+                        <label class="scope-option">
+
+                            <input type="radio"
+                                   name="reportScope"
+                                   value="all">
+
+                            <span class="scope-icon">
+                                <i class="fa-solid fa-users"></i>
+                            </span>
+
+                            <span>
+                                <strong>All Students</strong>
+                                <small>Entire student list</small>
+                            </span>
+
+                        </label>
+
+                        <label class="scope-option">
+
+                            <input type="radio"
+                                   name="reportScope"
+                                   value="branch">
+
+                            <span class="scope-icon">
+                                <i class="fa-solid fa-code-branch"></i>
+                            </span>
+
+                            <span>
+                                <strong>Branch Wise</strong>
+                                <small>Students from one branch</small>
+                            </span>
+
+                        </label>
+
+                        <label class="scope-option">
+
+                            <input type="radio"
+                                   name="reportScope"
+                                   value="overall">
+
+                            <span class="scope-icon">
+                                <i class="fa-solid fa-globe"></i>
+                            </span>
+
+                            <span>
+                                <strong>Overall</strong>
+                                <small>All branches combined</small>
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <!-- DYNAMIC FILTERS -->
+                <div class="filter-section">
+
+                    <!-- STUDENT -->
+                    <div class="filter-group"
+                         id="studentFilter">
+
+                        <label for="studentSelect">
+                            Student Name
+                            <span>*</span>
+                        </label>
+
+                        <select id="studentSelect">
+                            <option value="">Select Student</option>
+                        </select>
+
+                    </div>
+
+                    <!-- SELECTIVE -->
+                    <div class="filter-group hidden"
+                         id="selectiveFilter">
+
+                        <label>
+                            Select Students
+                            <span>*</span>
+                        </label>
+
+                        <div class="multi-select-box"
+                             id="studentMultiSelect">
+
+                            <button type="button"
+                                    class="multi-select-button"
+                                    id="multiSelectButton">
+
+                                <span id="selectedStudentsText">
+                                    Select Students
+                                </span>
+
+                                <i class="fa-solid fa-chevron-down"></i>
+
+                            </button>
+
+                            <div class="multi-select-dropdown"
+                                 id="multiSelectDropdown">
+
+                                <div class="select-all-row">
+
+                                    <label>
+                                        <input type="checkbox"
+                                               id="selectAllStudents">
+
+                                        Select All
+                                    </label>
+
+                                </div>
+
+                                <div id="studentCheckboxList"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BRANCH -->
+                    <div class="filter-group hidden"
+                         id="branchFilter">
+
+                        <label for="branchSelect">
+                            Department / Branch
+                            <span>*</span>
+                        </label>
+
+                        <select id="branchSelect">
+
+                            <option value="">
+                                Select Branch
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- OVERALL -->
+                    <div class="overall-info hidden"
+                         id="overallInfo">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <div>
+
+                            <strong>Overall Attendance</strong>
+
+                            <span>
+                                This report includes all students
+                                from all branches.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- DATE -->
+                <div class="date-section">
+
+                    <label class="section-label">
+                        Attendance Period
+                    </label>
+
+                    <div class="date-type-options">
+
+                        <label>
+                            <input type="radio"
+                                   name="dateType"
+                                   value="month"
+                                   checked>
+
+                            Particular Month
+                        </label>
+
+                        <label>
+                            <input type="radio"
+                                   name="dateType"
+                                   value="range">
+
+                            Custom Date Range
+                        </label>
+
+                    </div>
+
+                    <div class="date-fields"
+                         id="monthFields">
+
+                        <div class="filter-group">
+
+                            <label for="yearSelect">
+                                Select Year
+                                <span>*</span>
+                            </label>
+
+                            <select id="yearSelect">
+                                <option value="">-- Select Year --</option>
+                            </select>
+
+                        </div>
+
+                        <div class="filter-group">
+
+                            <label for="monthSelect">
+                                Select Month
+                                <span>*</span>
+                            </label>
+
+                            <select id="monthSelect">
+                                <option value="">-- Select Month --</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="date-fields hidden"
+                         id="rangeFields">
+
+                        <div class="filter-group">
+
+                            <label for="fromDate">
+                                From Date
+                                <span>*</span>
+                            </label>
+
+                            <input type="date"
+                                   id="fromDate">
+
+                        </div>
+
+                        <div class="filter-group">
+
+                            <label for="toDate">
+                                To Date
+                                <span>*</span>
+                            </label>
+
+                            <input type="date"
+                                   id="toDate">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="generator-footer">
+
+                    <button type="button"
+                            class="reset-btn"
+                            id="resetReportBtn">
+
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Reset
+
+                    </button>
+
+                    <button type="button"
+                            class="generate-btn"
+                            id="generateReportBtn">
+
+                        <i class="fa-solid fa-file-circle-check"></i>
+                        Generate Report
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- GENERATED REPORT -->
+            <div class="generated-report hidden"
+                 id="generatedReport">
+
+                <div class="generated-header">
+
+                    <div>
+
+                        <h2 id="generatedTitle">
+                            Attendance Report
+                        </h2>
+
+                        <p id="generatedSubtitle">
+                            Report details
+                        </p>
+
+                    </div>
+
+                    <div class="generated-actions">
+
+                        <button type="button"
+                                id="overallPdfBtn">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+                            Download PDF
+
+                        </button>
+
+                        <button type="button"
+                                id="overallExcelBtn">
+
+                            <i class="fa-solid fa-file-excel"></i>
+                            Download Excel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- SUMMARY -->
+                <div class="attendance-summary">
+
+                    <div class="attendance-stat">
+                        <span>Students</span>
+                        <strong id="resultStudents">0</strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>Working Days</span>
+                        <strong id="resultWorkingDays">0</strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>Present</span>
+                        <strong id="resultPresent">0</strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>Absent</span>
+                        <strong id="resultAbsent">0</strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>Average Attendance</span>
+                        <strong id="resultAverage">0%</strong>
+                    </div>
+
+                </div>
+
+                <!-- TABLE -->
+                <div class="attendance-table-wrapper">
+
+                    <table class="attendance-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Roll No.</th>
+                                <th>Student</th>
+                                <th>Department</th>
+                                <th>Present</th>
+                                <th>Absent</th>
+                                <th>Leave</th>
+                                <th>Working Days</th>
+                                <th>Attendance %</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="attendanceTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!-- PREVIOUS REPORTS -->
+            <div class="reports-section">
+
+                <div class="reports-header">
+
+                    <div>
+                        <h2>
+                            <i class="fa-solid fa-file-lines"></i>
+                            Student Reports
+                        </h2>
+
+                        <p id="reportCount">
+                            Showing 0 reports
+                        </p>
+                    </div>
+
+                    <div class="report-search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input type="text"
+                               id="searchInput"
+                               placeholder="Search reports...">
+
+                    </div>
+
+                </div>
+
+                <div class="reports-table-wrapper">
+
+                    <table class="reports-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Report ID</th>
+                                <th>Student</th>
+                                <th>Roll No.</th>
+                                <th>Department</th>
+                                <th>Semester</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="reportTable"></tbody>
+
+                    </table>
+
+                </div>
+
+                <button type="button"
+                        class="show-more-btn"
+                        id="showMoreBtn">
+
+                    Show More
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <footer>
+
+            <span>© 2026 Stud</span>
+            <span>Developed by Yash Puri</span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="profile-modal"
+     id="profileModal">
+
+    <div class="profile-modal-box">
+
+        <div class="modal-header">
+
+            <h2>Profile</h2>
+
+            <button type="button"
+                    id="closeProfileModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="profile-content">
+
+            <div class="large-avatar">Y</div>
+
+            <h3>Yash Puri</h3>
+            <p>Administrator</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- REPORT CREATE / EDIT MODAL -->
+<div class="report-modal"
+     id="reportModal">
+
+    <div class="report-modal-box">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Create Student Report
+            </h2>
+
+            <button type="button"
+                    id="closeModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="reportForm">
+
+            <input type="hidden"
+                   id="editReportId">
+
+            <div class="form-grid">
+
+                <div class="filter-group">
+                    <label for="studentName">Student Name *</label>
+                    <input type="text" id="studentName" required>
+                </div>
+
+                <div class="filter-group">
+                    <label for="rollNumber">Roll Number *</label>
+                    <input type="number" id="rollNumber" required>
+                </div>
+
+                <div class="filter-group">
+                    <label for="department">Department *</label>
+
+                    <select id="department" required>
+                        <option value="">Select Department</option>
+                    </select>
+
+                </div>
+
+                <div class="filter-group">
+                    <label for="semester">Semester *</label>
+
+                    <select id="semester" required>
+
+                        <option value="">Select Semester</option>
+                        <option value="I">I</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
+                        <option value="IV">IV</option>
+                        <option value="V">V</option>
+                        <option value="VI">VI</option>
+
+                    </select>
+
+                </div>
+
+                <div class="filter-group">
+                    <label for="reportType">Report Type *</label>
+
+                    <select id="reportType" required>
+
+                        <option value="">Select Type</option>
+                        <option value="Attendance">Attendance</option>
+                        <option value="Fees">Fees</option>
+                        <option value="Result">Result</option>
+                        <option value="Merit">Merit</option>
+                        <option value="Performance">Performance</option>
+                        <option value="Absent">Absent</option>
+                        <option value="Scholarship">Scholarship</option>
+                        <option value="General">General</option>
+
+                    </select>
+
+                </div>
+
+                <div class="filter-group">
+                    <label for="reportStatus">Status</label>
+
+                    <select id="reportStatus">
+
+                        <option value="Ready">Ready</option>
+                        <option value="Pending">Pending</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="filter-group full-width">
+
+                <label for="reportDescription">
+                    Description
+                </label>
+
+                <textarea id="reportDescription"
+                          rows="4"
+                          placeholder="Enter report description..."></textarea>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="reset-btn"
+                        id="cancelModal">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="generate-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Report
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- VIEW MODAL -->
+<div class="view-modal"
+     id="viewModal">
+
+    <div class="view-modal-box">
+
+        <div class="modal-header">
+
+            <h2>Report Details</h2>
+
+            <button type="button"
+                    id="closeViewModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div id="reportPreview"></div>
+
+        <div class="modal-actions">
+
+            <button type="button"
+                    class="reset-btn"
+                    id="closeViewBtn">
+
+                Close
+
+            </button>
+
+            <button type="button"
+                    class="generate-btn"
+                    id="viewPdfBtn">
+
+                <i class="fa-solid fa-print"></i>
+                Print / PDF
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

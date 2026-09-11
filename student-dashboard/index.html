@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>StudentSphere — Student Dashboard</title>
+
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="brand">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            StudentSphere
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                class="nav-link active"
+                href="/student-dashboard/index.html"
+            >
+                <i class="bi bi-grid-1x2"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/shared/StudentHomePage.html"
+            >
+                <i class="bi bi-people"></i>
+                <span>Profile</span>
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/courses/index.html"
+            >
+                <i class="bi bi-journal-bookmark"></i>
+                <span>Courses</span>
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/fees/index.html"
+            >
+                <i class="bi bi-wallet2"></i>
+                <span>Fees</span>
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/shared/StudentHomePage.html#achievements"
+            >
+                <i class="bi bi-award"></i>
+                <span>Achievements</span>
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+
+
+
+    <main
+        class="main"
+        id="dashboard"
+    >
+
+
+
+
+        <header class="topbar">
+
+
+            <div class="greeting">
+
+                <button
+                    class="hamburger"
+                    id="menuToggle"
+                    aria-label="Open navigation"
+                >
+                    <i class="bi bi-list"></i>
+                </button>
+
+
+                <h1>
+
+                    Welcome back,
+
+                    <span id="loggedInStudentName">
+                        Student
+                    </span>
+
+                    <span aria-hidden="true">
+                        👋
+                    </span>
+
+                </h1>
+
+            </div>
+
+
+
+            <div class="header-actions">
+
+
+
+
+                <button
+                    class="icon-btn"
+                    id="notificationBtn"
+                    aria-label="Notifications"
+                >
+
+                    <i class="bi bi-bell"></i>
+
+                    <b class="alert-dot"></b>
+
+                </button>
+
+
+
+
+
+                <button
+                    class="profile-button"
+                    id="profileMenuToggle"
+                    aria-expanded="false"
+                >
+
+                    <span
+                        class="avatar"
+                        id="profileAvatar"
+                    >
+                        P
+                    </span>
+
+                    <span id="profileStudentName">Student</span>
+
+                    <i class="bi bi-chevron-down"></i>
+
+                </button>
+
+
+
+
+
+                <div
+                    class="profile-dropdown"
+                    id="profileDropdown"
+                >
+
+                    <button
+                        class="profile-menu-item"
+                        id="myProfile"
+                    >
+
+                        <i class="bi bi-person"></i>
+
+                        My Profile
+
+                    </button>
+
+
+                    <div class="profile-menu-divider"></div>
+
+
+                    <button
+                        class="profile-menu-item danger"
+                        id="profileLogout"
+                    >
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Logout
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+
+
+        <div class="dashboard">
+
+
+
+
+            <section id="timetable">
+
+
+                <div class="section-heading">
+
+                    <h2>
+                        Today's timetable
+                    </h2>
+
+                </div>
+
+
+
+                <div class="timetable-grid">
+
+
+
+
+                    <article
+                        class="card class-card class-cyan"
+                        data-toast="Java Programming starts at 09:00 AM"
+                    >
+
+                        <div class="class-time">
+
+                            <span>
+                                09:00 AM – 10:00 AM
+                            </span>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <h3>
+                            Java Programming
+                        </h3>
+
+
+                        <div class="class-meta">
+
+                            <b>
+                                Mrs.M.B Patil
+                            </b>
+
+                            <span class="meta-dot"></span>
+
+                            Room 302
+
+                        </div>
+
+                    </article>
+
+
+
+
+
+                    <article
+                        class="card class-card class-violet"
+                        data-toast="Database Management starts at 10:00 AM"
+                    >
+
+                        <div class="class-time">
+
+                            <span>
+                                10:00 AM – 11:00 AM
+                            </span>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <h3>
+                            Database Management
+                        </h3>
+
+
+                        <div class="class-meta">
+
+                            <b>
+                                Dr. Ajit Patil
+                            </b>
+
+                            <span class="meta-dot"></span>
+
+                            Lab 104
+
+                        </div>
+
+                    </article>
+
+
+
+
+
+                    <article
+                        class="card class-card class-green"
+                        data-toast="Python Programming starts at 11:00 AM"
+                    >
+
+                        <div class="class-time">
+
+                            <span>
+                                11:00 AM – 12:00 PM
+                            </span>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <h3>
+                            Python Programming
+                        </h3>
+
+
+                        <div class="class-meta">
+
+                            <b>
+                                Mrs. Gawale
+                            </b>
+
+                            <span class="meta-dot"></span>
+
+                            Room 208
+
+                        </div>
+
+                    </article>
+
+
+
+
+
+                    <article
+                        class="card class-card class-amber"
+                        data-toast="Data Communication starts at 01:00 PM"
+                    >
+
+                        <div class="class-time">
+
+                            <span>
+                                01:00 PM – 02:00 PM
+                            </span>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <h3>
+                            Data Communication
+                        </h3>
+
+
+                        <div class="class-meta">
+
+                            <b>
+                                Msr.S.S Jadhav
+                            </b>
+
+                            <span class="meta-dot"></span>
+
+                            Room 119
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+
+
+
+            <section id="academic">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Academic overview
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-grid">
+
+
+
+
+                    <article
+                        class="card metric-card attendance-card"
+                    >
+
+                        <h3>
+                            Attendance
+                        </h3>
+
+                        <p class="sub">
+                            Campus attendance today
+                        </p>
+
+
+                        <div class="ring-wrap">
+
+                            <div
+                                class="ring"
+                                style="--value:92;--ring:#22d3ee"
+                            >
+
+                                <span>
+                                    92%
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend">
+
+                            <span>
+                                <i class="dot cyan"></i>
+                                Present
+                            </span>
+
+                            <span>
+                                <i class="dot amber"></i>
+                                On leave
+                            </span>
+
+                            <span>
+                                <i class="dot red"></i>
+                                Absent
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+
+
+
+                    <article
+                        class="card metric-card assignment-metric"
+                    >
+
+                        <h3>
+                            Assignment completion
+                        </h3>
+
+                        <p class="sub">
+                            Across active courses
+                        </p>
+
+
+                        <div class="ring-wrap">
+
+                            <div
+                                class="ring"
+                                style="--value:85;--ring:#a78bfa"
+                            >
+
+                                <span>
+                                    85%
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend">
+
+                            <span>
+                                <i class="dot violet"></i>
+                                Completed
+                            </span>
+
+                            <span>
+                                <i class="dot amber"></i>
+                                Pending
+                            </span>
+
+                            <span>
+                                <i class="dot red"></i>
+                                Late
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+
+
+
+                    <article
+                        class="card metric-card achievement-metric"
+                        id="achievements"
+                    >
+
+                        <h3>
+                            Achievements
+                        </h3>
+
+                        <p class="sub">
+                            Recent student milestones
+                        </p>
+
+
+                        <div class="ring-wrap">
+
+                            <div
+                                class="ring"
+                                style="--value:94;--ring:#34d399"
+                            >
+
+                                <span>
+                                    94%
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend">
+
+                            <span>
+                                <i class="dot green"></i>
+                                Achievement rate
+                            </span>
+
+                            <span>
+                                6 badges earned
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+
+
+
+            <section
+                class="content-grid"
+                id="assignments"
+            >
+
+
+
+
+                <article
+                    class="card content-card assignment-card"
+                >
+
+
+                    <div class="card-title">
+
+                        <h3>
+                            Assignment Details
+                        </h3>
+
+                    </div>
+
+
+
+                    <div class="assignment-toolbar">
+
+                        <div class="assignment-filters">
+
+
+                            <button
+                                class="assignment-filter active"
+                                data-filter="all"
+                            >
+                                All
+                            </button>
+
+
+                            <button
+                                class="assignment-filter"
+                                data-filter="pending"
+                            >
+                                Pending
+                            </button>
+
+
+                            <button
+                                class="assignment-filter"
+                                data-filter="submitted"
+                            >
+                                Submitted
+                            </button>
+
+
+                            <button
+                                class="assignment-filter"
+                                data-filter="completed"
+                            >
+                                Completed
+                            </button>
+
+
+                            <button
+                                class="assignment-filter"
+                                data-filter="overdue"
+                            >
+                                Overdue
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="assignment-table-wrap">
+
+
+                        <table class="assignment-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        ASSIGNMENT NAME
+                                    </th>
+
+                                    <th>
+                                        SUBJECT
+                                    </th>
+
+                                    <th>
+                                        FACULTY
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        DUE DATE
+                                    </th>
+
+                                    <th>
+                                        SUBMISSION
+                                    </th>
+
+                                    <th>
+                                        PRIORITY
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+
+                            <tbody>
+
+
+
+
+                                <tr data-status="pending">
+
+                                    <td>
+                                        Java Mini Project
+                                    </td>
+
+                                    <td>
+                                        Java Programming
+                                    </td>
+
+                                    <td>
+                                        Mr. Sharma
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge status-pending">
+                                            Pending
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Tomorrow
+                                    </td>
+
+                                    <td>
+                                        —
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge priority-high">
+                                            High
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+
+
+                                <tr data-status="pending">
+
+                                    <td>
+                                        Python Practical
+                                    </td>
+
+                                    <td>
+                                        Python Programming
+                                    </td>
+
+                                    <td>
+                                        Ms. Kaur
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge status-pending">
+                                            Pending
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Today
+                                    </td>
+
+                                    <td>
+                                        —
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge priority-high">
+                                            High
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+
+
+                                <tr data-status="submitted">
+
+                                    <td>
+                                        DBMS Normalisation
+                                    </td>
+
+                                    <td>
+                                        Database Management
+                                    </td>
+
+                                    <td>
+                                        Dr. Menon
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge status-submitted">
+                                            Submitted
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        02 Aug
+                                    </td>
+
+                                    <td>
+                                        28 Jul
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge priority-medium">
+                                            Medium
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+
+
+                                <tr data-status="completed">
+
+                                    <td>
+                                        Network Topology
+                                    </td>
+
+                                    <td>
+                                        Data Communication
+                                    </td>
+
+                                    <td>
+                                        Mr. Raghav
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge status-completed">
+                                            Completed
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        08 Aug
+                                    </td>
+
+                                    <td>
+                                        27 Jul
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge priority-low">
+                                            Low
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+
+
+                                <tr data-status="overdue">
+
+                                    <td>
+                                        Java Quiz
+                                    </td>
+
+                                    <td>
+                                        Java Programming
+                                    </td>
+
+                                    <td>
+                                        Mr. Sharma
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge status-overdue">
+                                            Overdue
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        25 Jul
+                                    </td>
+
+                                    <td>
+                                        —
+                                    </td>
+
+                                    <td>
+
+                                        <span class="table-badge priority-high">
+                                            High
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </article>
+
+
+
+
+
+                <article
+                    class="card content-card notice-panel"
+                >
+
+
+                    <div class="card-title">
+
+                        <h3>
+                            Notice board
+                        </h3>
+
+                        <span>
+                            <i class="bi bi-broadcast-pin"></i>
+                            Latest updates
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="notice-scroll">
+
+
+
+
+                        <div class="notice notice-red">
+
+                            <b>
+
+                                <i class="bi bi-calendar2-week"></i>
+
+                                Exam Schedule Released
+
+                            </b>
+
+
+                            <p>
+                                The final examination schedule
+                                for all departments is now available.
+                            </p>
+
+
+                            <span class="notice-meta">
+                                29 Jul 2026 · Academic Office
+                            </span>
+
+                        </div>
+
+
+
+
+
+                        <div class="notice notice-amber">
+
+                            <b>
+
+                                <i class="bi bi-clipboard-check"></i>
+
+                                Assignment Submission Reminder
+
+                            </b>
+
+
+                            <p>
+                                Faculty should verify all pending
+                                internal assessment submissions.
+                            </p>
+
+
+                            <span class="notice-meta">
+                                28 Jul 2026 · Academic Cell
+                            </span>
+
+                        </div>
+
+
+
+
+
+                        <div class="notice notice-cyan">
+
+                            <b>
+
+                                <i class="bi bi-bus-front"></i>
+
+                                Industrial Visit Registration
+
+                            </b>
+
+
+                            <p>
+                                Student registrations are now open
+                                for the upcoming industry visit.
+                            </p>
+
+
+                            <span class="notice-meta">
+                                27 Jul 2026 · Training &amp; Placement
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+
+
+<div
+    class="toast-box"
+    id="toast"
+    role="status"
+>
+
+    <i class="bi bi-check-circle-fill"></i>
+
+    <div>
+
+        <b id="toastTitle">
+            StudentSphere
+        </b>
+
+        <br>
+
+        <span id="toastText">
+            Action completed.
+        </span>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
+

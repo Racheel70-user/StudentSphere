@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Grading | Stud</title>
+
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="faculty-portal.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+
+        
+        .in
+        {
+            height: 150px;
+            width: 600px;
+        }
+
+        .task {
+            position: relative;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .task-btn {
+            padding: 7px 13px;
+            border-radius: 7px;
+            border: 1px solid rgba(148, 163, 184, .14);
+            background: #162238;
+            color: #a9b7ca;
+            font: 600 11px "DM Sans", sans-serif;
+            cursor: pointer;
+            transition: .15s ease;
+        }
+
+        .task-btn:hover {
+            border-color: #3b82f6;
+            color: #eef4ff;
+        }
+
+        .task-btn.view:hover {
+            border-color: #22d3ee;
+            color: #22d3ee;
+        }
+
+        .task-btn.edit:hover {
+            border-color: #a78bfa;
+            color: #a78bfa;
+        }
+
+        .task-btn.done {
+            background: linear-gradient(135deg, #3b82f6, #22d3ee);
+            border: 0;
+            color: #071019;
+        }
+
+        .task-btn.done:hover {
+            color: #071019;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, .3);
+        }
+
+        .task-btn.done[disabled] {
+            opacity: .55;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .task.completed .progress i {
+            background: linear-gradient(90deg, #34d399, #22d3ee);
+        }
+
+        .task-complete-msg {
+            display: none;
+            margin-top: 10px;
+            padding: 8px 11px;
+            border-radius: 8px;
+            background: rgba(52, 211, 153, .14);
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .task.completed .task-complete-msg {
+            display: block;
+        }
+
+     
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(5, 9, 16, .68);
+            backdrop-filter: blur(3px);
+            place-items: center;
+        }
+
+        .modal-overlay.open {
+            display: grid;
+        }
+
+        .modal-box {
+            width: min(460px, 90vw);
+            padding: 26px;
+            border: 1px solid rgba(148, 163, 184, .14);
+            border-radius: 16px;
+            background: #111b2e;
+            box-shadow: 0 25px 60px #0008;
+        }
+
+        .modal-box h3 {
+            margin: 0 0 4px;
+            font: 600 18px "Outfit", sans-serif;
+            color: #eef4ff;
+        }
+
+        .modal-sub {
+            margin: 0 0 18px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .modal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-top: 1px solid rgba(148, 163, 184, .14);
+            font-size: 12px;
+        }
+
+        .modal-row:first-of-type {
+            border-top: none;
+        }
+
+        .modal-row span:first-child {
+            color: #94a3b8;
+        }
+
+        .modal-row span:last-child {
+            color: #eef4ff;
+            font-weight: 600;
+        }
+
+        .modal-field {
+            margin-top: 13px;
+        }
+
+        .modal-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: #a9b7ca;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .toast-msg {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            z-index: 1100;
+            transform: translate(-50%, 20px);
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: #111b2e;
+            border: 1px solid rgba(52, 211, 153, .35);
+            color: #34d399;
+            font: 600 12px "DM Sans", sans-serif;
+            box-shadow: 0 15px 40px #0008;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        
+           .nav-link {
+               position:relative; 
+               display:flex;
+               align-items:center; 
+               gap:13px;
+               min-height:43px; 
+               padding:0 12px; 
+               border-radius:12px; 
+               color:#a9b7ca; 
+               text-decoration:none; 
+               font-weight:500; 
+               white-space:nowrap; 
+               transition:.18s ease;
+        }
+
+          .nav-link:hover { 
+            color:#f3f8ff; 
+            background:rgba(148,163,184,.08); 
+            transform:translateX(2px);
+        }
+
+    .nav-link.active {
+         color:#fff; 
+         background:linear-gradient(90deg,rgba(59,130,246,.25),rgba(59,130,246,.08)); 
+         box-shadow:inset 2px 0 #60a5fa; 
+        }
+
+    .nav-link.active i { color:#60a5fa; }
+
+     .nav-link i { 
+        width:18px; 
+        font-size:17px; 
+        text-align:center;
+     }
+       .nav-label {
+         margin:0 10px 8px; 
+         color:#63738c; 
+         font-size:10px; 
+         font-weight:700; 
+         letter-spacing:1.2px; 
+         text-transform:uppercase;
+         }
+    .sidebar-nav { 
+        display:grid; 
+        gap:3px; 
+        overflow:auto; 
+        scrollbar-width:none; 
+    }
+    .sidebar-nav::-webkit-scrollbar { display:none; }
+
+    .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 30px;
+            font: 700 22px/1 "Outfit", sans-serif;
+            letter-spacing: -.6px;
+            color: #fff;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            box-shadow: 0 7px 22px rgba(59, 130, 246, .36);
+            color: #071019;
+            font-size: 16px;
+        }
+
+        
+        body { overflow-x: hidden; }
+
+        .profile-button,
+        .profile-menu-item {
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: none;
+            outline: 0;
+            cursor: pointer;
+        }
+
+        .profile-menu-item {
+            border: 0;
+            background: transparent;
+        }
+
+        .side {
+            width: 270px;
+            height: auto;
+            top: 0;
+            bottom: 0;
+            padding: 24px 15px 18px;
+        }
+
+        .main {
+            margin-left: 270px;
+            padding: 24px 28px 28px;
+        }
+
+        .side .bottom .button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            color: #fca5a5;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            background: rgba(30, 41, 59, .58);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .side .bottom .button:hover {
+            background: rgba(251, 113, 133, .12);
+            border-color: rgba(251, 113, 133, .4);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+     
+
+  
+    
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+       
+        <aside class="side">
+
+                <div class="brand">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            Stud
+        </div>
+
+                   <nav class="sidebar-nav">
+
+                <a class="nav-link " href="faculty-portal-secure.html">
+                    <span class="ico">▦</span>
+                    <span>Home Page</span>
+                </a>
+
+                <a class="nav-link" href="mark-attendance-secure.html">
+                    <span class="ico">▥</span>
+                    <span>Student Attendance</span>
+                </a>
+
+                <a class="nav-link active" href="review-grading-secure.html">
+                    <span class="ico">♜</span>
+                    <span>Student Grade</span>
+                </a>
+
+                <a class="nav-link" href="create-assessment-secure.html">
+                    <span class="ico">＋</span>
+                    <span>Create Assessment</span>
+                </a>
+
+                <a class="nav-link" href="notes-lectures-secure.html">
+                    <span class="ico">▤</span>
+                    <span>Notes & Lectures</span>
+                </a>
+
+              
+
+                <a class="nav-link" href="apply-leave-secure.html">
+                    <span class="ico">▱</span>
+                    <span>Leave </span>
+                </a>
+
+            </nav>
+
+            <div class="bottom">
+                <button class="button" onclick="signOut()">
+                    &nbsp; Sign Out
+                </button>
+            </div>
+
+        </aside>
+
+     
+        <main class="main">
+
+            <header class="top">
+
+                <div class="crumb">
+                    
+                    <b>Student Grade</b>
+                </div>
+
+                   <div class="header-actions">
+        <button class="profile-button" id="profileMenuToggle" aria-expanded="false" aria-controls="profileDropdown">
+          <div class="avatar" data-faculty-initials>--</div>
+          <span data-faculty-name>Loading...</span>
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown" aria-label="Profile menu">
+          <button class="profile-menu-item" type="button" id="myProfile">
+            <i class="bi bi-person"></i>My Profile
+          </button>
+          <div class="profile-menu-divider"></div>
+          <button class="profile-menu-item danger" type="button" id="profileLogout" onclick="signOut()">
+            <i class="bi bi-box-arrow-right"></i>Logout
+          </button>
+        </div>
+        </div>
+
+            </header>
+
+            <section class="heading">
+
+                <div>
+                    <h1>Review Grading</h1>
+                 
+                </div>
+
+                <button class="button" id="publishGradesBtn">
+                    Publish Reviewed Grades
+                </button>
+
+            </section>
+
+            <article class="card">
+
+                <h2>Assignments Awaiting Review</h2>
+
+                <div class="task"
+                    data-task
+                    data-title="Assignment 3 · Normalisation"
+                    data-course="Database Management Systems"
+                    data-remaining="18"
+                    data-total="45"
+                    data-due="2026-08-04"
+                    data-progress="62"
+                    data-notes="Covers 1NF, 2NF and 3NF with a worked schema-redesign exercise. Submissions are individual; late submissions lose 10% per day."
+                    >
+
+                    <em>18 Remaining</em>
+                    <b>Assignment 3 · Normalisation</b>
+                    <small>Database Management Systems</small>
+
+                    <div class="progress">
+                        <i style="width:62%;"></i>
+                    </div>
+
+                    <div class="task-complete-msg">
+                        ✓ Assignment submission completed
+                    </div>
+
+                    <div class="task-actions">
+                        <button class="task-btn view" data-action="view">View</button>
+                        <button class="task-btn edit" data-action="edit">Edit</button>
+                        <button class="task-btn done" data-action="done">End Assignment</button>
+                    </div>
+
+                </div>
+
+                <div class="task"
+                    data-task
+                    data-title="Lab Exercise 2 · SQL Queries"
+                    data-course="Database Management Systems"
+                    data-remaining="24"
+                    data-total="52"
+                    data-due="2026-08-08"
+                    data-progress="34"
+                    data-notes="Hands-on lab covering JOINs, GROUP BY and subqueries. Students submit their .sql file plus a screenshot of query output."
+                    >
+
+                    <em>24 Remaining</em>
+                    <b>Lab Exercise 2 · SQL Queries</b>
+                    <small>Database Management Systems</small>
+
+                    <div class="progress">
+                        <i style="width:34%;"></i>
+                    </div>
+
+                    <div class="task-complete-msg">
+                        ✓ Assignment submission completed
+                    </div>
+
+                    <div class="task-actions">
+                        <button class="task-btn view" data-action="view">View</button>
+                        <button class="task-btn edit" data-action="edit">Edit</button>
+                        <button class="task-btn done" data-action="done">End Assignment</button>
+                    </div>
+
+                </div>
+
+                <hr class="rule">
+
+                <div class="fields">
+
+                    <div class="s-field">
+                        <label>Student</label>
+
+                        <select id="studentSelect">
+                            <option value="">Loading students…</option>
+                        </select>
+                    </div>
+
+                   
+                    <div>
+                        <label>Assignment Name</label>
+                        <select id ="assign">
+                            <option></option>
+                            <option>Normalisation</option>
+                            <option>SQL Queries</option>
+                        </select>
+                        
+
+                    </div>
+
+                    <div class="field">
+                        <label>Marks Out of 30</label>
+
+                        <input
+                            min="0"
+                            max="30"
+                            type="number"
+                            id="marksInput"
+                            value="0">
+                    </div>
+
+                </div>
+
+                <div class="field" style="margin-top:17px;">
+
+                    <label>Feedback</label>
+                    <textarea class="in" rows="4" id="feedback" style="width: 1150px; resize: none;" ></textarea>
+                </div>
+
+              
+                <div class="actions">
+
+                    <button class="secondary" id="saveDraftBtn">
+                        Save Draft
+                    </button>
+
+                    <button class="button" id="saveNextBtn">
+                        Save &amp; Next
+                    </button>
+
+                </div>
+
+            </article>
+
+        </main>
+
+    </div>
+
+    
+    <div class="modal-overlay" id="viewModal">
+        <div class="modal-box">
+            <h3 id="viewTitle">Assignment</h3>
+            <p class="modal-sub" id="viewCourse">Course</p>
+
+            <div class="modal-row">
+                <span>Due date</span>
+                <span id="viewDue">—</span>
+            </div>
+
+            <div class="modal-row">
+                <span>Total students</span>
+                <span id="viewTotal">—</span>
+            </div>
+
+            <div class="modal-row">
+                <span>Pending review</span>
+                <span id="viewRemaining">—</span>
+            </div>
+
+            <div class="modal-row">
+                <span>Grading progress</span>
+                <span id="viewProgress">—</span>
+            </div>
+
+            <p class="modal-sub" style="margin-top:16px;" id="viewNotes"></p>
+
+            <div class="modal-actions">
+                <button class="secondary" data-close-modal="viewModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-box">
+            <h3>Edit Assignment</h3>
+            
+
+            <div class="modal-field">
+                <label>Assignment Title</label>
+                <input type="text" id="editTitle">
+            </div>
+
+            <div class="modal-field">
+                <label>Course</label>
+                <input type="text" id="editCourse">
+            </div>
+
+            <div class="modal-field">
+                <label>Due Date</label>
+                <input type="date" id="editDue">
+            </div>
+
+            <div class="modal-field">
+                <label>Total Students</label>
+                <input type="number" id="editTotal">
+            </div>
+
+            <div class="modal-field">
+                <label>Pending Review</label>
+                <input type="number" id="editRemaining">
+            </div>
+
+            <div class="modal-field">
+                <label>Description / Intro</label>
+                <textarea id="editNotes" rows="4" style="width:100%; resize:vertical; background:#0b1526; border:1px solid rgba(148,163,184,.2); border-radius:8px; color:#eef4ff; font:400 12px 'DM Sans', sans-serif; padding:8px 10px;"></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button class="secondary" data-close-modal="editModal">Cancel</button>
+                <button class="button" id="editSave">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="toast-msg" id="taskToast">✓ Assignment submission completed</div>
+
+   
+    <script src="faculty-auth.js"></script>
+
+    <script>
+        fillFaculty();
+
+     
+        var studentSelect = document.getElementById("studentSelect");
+
+        fetch("users_with_class.json")
+            .then(function (res) { return res.json(); })
+            .then(function (students) {
+
+                if (!students.length) {
+                    studentSelect.innerHTML = '<option value="">No students found</option>';
+                    return;
+                }
+
+                studentSelect.innerHTML = students.map(function (student, i) {
+
+                    var roll = student.class + "-" + String(student.id).padStart(3, "0");
+                    var label = student.name + " · " + roll;
+
+                    return '<option value="' + label + '"' + (i === 0 ? " selected" : "") + '>' + label + '</option>';
+
+                }).join("");
+            })
+            .catch(function (err) {
+                studentSelect.innerHTML = '<option value="">Could not load students</option>';
+                console.error("Failed to load students:", err);
+            });
+
+        var viewModal = document.getElementById("viewModal");
+        var editModal = document.getElementById("editModal");
+        var toast = document.getElementById("taskToast");
+        var toastTimer;
+        var activeTask = null;
+
+        function openModal(modal) {
+            modal.classList.add("open");
+        }
+
+        function closeModal(modal) {
+            modal.classList.remove("open");
+        }
+
+        document.querySelectorAll("[data-close-modal]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                closeModal(document.getElementById(btn.dataset.closeModal));
+            });
+        });
+
+        [viewModal, editModal].forEach(function (modal) {
+            modal.addEventListener("click", function (e) {
+                if (e.target === modal) closeModal(modal);
+            });
+        });
+
+        function showToast(text) {
+            toast.textContent = "✓ " + text;
+            toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(function () {
+                toast.classList.remove("show");
+            }, 2600);
+        }
+
+        function refreshTaskSummary(task) {
+            task.querySelector("em").textContent =
+                task.dataset.remaining + " Remaining";
+            task.querySelector("b").textContent = task.dataset.title;
+            task.querySelector("small").textContent = task.dataset.course;
+        }
+
+        function updateProgressBar(task) {
+
+            var total = parseFloat(task.dataset.total);
+            var remaining = parseFloat(task.dataset.remaining);
+
+            if (!total || total <= 0) return;
+
+            var reviewed = total - remaining;
+            var percent = Math.max(0, Math.min(100, Math.round((reviewed / total) * 100)));
+
+            task.dataset.progress = String(percent);
+            task.querySelector(".progress i").style.width = percent + "%";
+
+            var doneBtn = task.querySelector('[data-action="done"]');
+
+            if (percent >= 100) {
+                task.classList.add("completed");
+                doneBtn.textContent = "Undo Completion";
+            } else {
+                task.classList.remove("completed");
+                doneBtn.textContent = "End Assignment";
+            }
+            
+        }
+
+        document.querySelectorAll("[data-task]").forEach(function (task) {
+
+            task.addEventListener("click", function (e) {
+
+                var action = e.target.dataset.action;
+                if (!action) return;
+
+                activeTask = task;
+
+                if (action === "view") {
+
+                    document.getElementById("viewTitle").textContent = task.dataset.title;
+                    document.getElementById("viewCourse").textContent = task.dataset.course;
+                    document.getElementById("viewDue").textContent = task.dataset.due;
+                    document.getElementById("viewTotal").textContent = task.dataset.total;
+                    document.getElementById("viewRemaining").textContent = task.dataset.remaining;
+                    document.getElementById("viewProgress").textContent = task.dataset.progress + "%";
+                    document.getElementById("viewNotes").textContent =
+                        task.dataset.notes || "No additional notes for this assignment.";
+
+                    openModal(viewModal);
+
+                } else if (action === "edit") {
+
+                    document.getElementById("editTitle").value = task.dataset.title;
+                    document.getElementById("editCourse").value = task.dataset.course;
+                    document.getElementById("editDue").value = task.dataset.due;
+                    document.getElementById("editTotal").value = task.dataset.total;
+                    document.getElementById("editRemaining").value = task.dataset.remaining;
+                    document.getElementById("editNotes").value = task.dataset.notes || "";
+
+                    openModal(editModal);
+
+                } else if (action === "done") {
+
+                    if (!task.classList.contains("completed")) {
+
+                        
+                        task.dataset.prevRemaining = task.dataset.remaining;
+                        task.dataset.remaining = "0";
+                        updateProgressBar(task);
+                        refreshTaskSummary(task);
+
+                        showToast("Assignment submission completed");
+
+                    } else {
+
+                        var restored = task.dataset.prevRemaining;
+                        task.dataset.remaining = (restored !== undefined && restored !== "") ? restored : "1";
+                        updateProgressBar(task);
+                        refreshTaskSummary(task);
+
+                        showToast("Marked as not completed");
+                    }
+                }
+
+            });
+
+        });
+
+        document.getElementById("editSave").addEventListener("click", function () {
+
+            if (!activeTask) return;
+
+            activeTask.dataset.title = document.getElementById("editTitle").value;
+            activeTask.dataset.course = document.getElementById("editCourse").value;
+            activeTask.dataset.due = document.getElementById("editDue").value;
+            activeTask.dataset.total = document.getElementById("editTotal").value;
+            activeTask.dataset.remaining = document.getElementById("editRemaining").value;
+            activeTask.dataset.notes = document.getElementById("editNotes").value;
+
+            refreshTaskSummary(activeTask);
+            updateProgressBar(activeTask);
+            closeModal(editModal);
+            showToast("Assignment details updated");
+
+        });
+
+        document.getElementById("publishGradesBtn").addEventListener("click", function () {
+            showToast("Reviewed grades published");
+        });
+
+        document.getElementById("saveDraftBtn").addEventListener("click", function () {
+            showToast("Draft saved");
+        });
+
+        document.getElementById("saveNextBtn").addEventListener("click", function () {
+            showToast("Saved. Loading next student");
+        });
+
+        var marks = document.getElementById("marksInput").value;
+        if(marks > 30)
+        {
+            alert("marks should be under 30");
+        }
+
+
+    </script>
+
+</body>
+
+</html>
+

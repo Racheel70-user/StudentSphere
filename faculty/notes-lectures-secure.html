@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes & Lectures | Stud</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+   
+    <link rel="stylesheet" href="faculty-portal.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+</head>
+
+<style>
+     .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 30px;
+            font: 700 22px/1 "Outfit", sans-serif;
+            letter-spacing: -.6px;
+            color: #fff;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            box-shadow: 0 7px 22px rgba(59, 130, 246, .36);
+            color: #071019;
+            font-size: 16px;
+        }
+
+        .toast-msg {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            z-index: 1100;
+            transform: translate(-50%, 20px);
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: #111b2e;
+            border: 1px solid rgba(52, 211, 153, .35);
+            color: #34d399;
+            font: 600 12px "DM Sans", sans-serif;
+            box-shadow: 0 15px 40px #0008;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        body { overflow-x: hidden; }
+
+        .profile-button,
+        .profile-menu-item {
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: none;
+            outline: 0;
+            cursor: pointer;
+        }
+
+        .profile-menu-item {
+            border: 0;
+            background: transparent;
+        }
+
+        .side {
+            width: 270px;
+            height: auto;
+            top: 0;
+            bottom: 0;
+            padding: 24px 15px 18px;
+        }
+
+        .main {
+            margin-left: 270px;
+            padding: 24px 28px 28px;
+        }
+
+        .side .bottom .button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            color: #fca5a5;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            background: rgba(30, 41, 59, .58);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .side .bottom .button:hover {
+            background: rgba(251, 113, 133, .12);
+            border-color: rgba(251, 113, 133, .4);
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        
+        .drop-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 26px 16px;
+            border: 1.5px dashed rgba(148, 163, 184, .3);
+            border-radius: 12px;
+            background: var(--card-2);
+            text-align: center;
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag {
+            border-color: var(--blue);
+            background: rgba(59, 130, 246, .06);
+        }
+
+        .drop-zone i {
+            font-size: 22px;
+            color: var(--cyan);
+        }
+
+        .drop-zone b {
+            font-size: 12.5px;
+            color: var(--text);
+        }
+
+        .drop-zone small {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .file-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 9px 12px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: var(--card-2);
+            font-size: 11.5px;
+        }
+
+        .file-chip i:first-child {
+            color: var(--cyan);
+            font-size: 15px;
+        }
+
+        .file-chip .file-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .file-chip .file-remove {
+            border: 0;
+            background: transparent;
+            color: var(--red);
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        
+        .material {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 13px;
+            margin-bottom: 10px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--card-2);
+        }
+
+        .material:last-child {
+            margin-bottom: 0;
+        }
+
+        .material .m-ico {
+            flex: 0 0 auto;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            font-size: 15px;
+            background: rgba(59, 130, 246, .14);
+            color: var(--blue);
+        }
+
+        .material.type-lecture .m-ico {
+            background: rgba(34, 211, 238, .14);
+            color: var(--cyan);
+        }
+
+        .material.type-reading .m-ico {
+            background: rgba(167, 139, 250, .14);
+            color: var(--violet);
+        }
+
+        .material .m-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .material b {
+            display: block;
+            font-size: 12.5px;
+            color: var(--text);
+        }
+
+        .material small {
+            display: block;
+            margin-top: 3px;
+            font-size: 10.5px;
+            color: var(--muted);
+        }
+
+        .material .m-actions {
+            flex: 0 0 auto;
+            display: flex;
+            gap: 6px;
+        }
+
+        .material .m-actions button {
+            padding: 6px 9px;
+            border-radius: 7px;
+            border: 1px solid var(--line);
+            background: #162238;
+            color: #a9b7ca;
+            font-size: 11px;
+            cursor: pointer;
+            transition: .15s ease;
+        }
+
+        .material .m-actions button:hover {
+            border-color: var(--blue);
+            color: var(--text);
+        }
+
+        .material .m-actions button.remove:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .empty-state {
+            padding: 22px 10px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 11.5px;
+        }
+</style>
+<body>
+
+    <div class="app">
+
+        
+        <aside class="side">
+
+             <div class="brand">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            Stud
+        </div>
+        <nav class="sidebar-nav">
+
+                <a class="nav-link " href="faculty-portal-secure.html">
+                    <span class="ico">▦</span>
+                    <span>Home Page</span>
+                </a>
+
+                <a class="nav-link" href="mark-attendance-secure.html">
+                    <span class="ico">▥</span>
+                    <span>Student Attendance</span>
+                </a>
+
+                <a class="nav-link" href="review-grading-secure.html">
+                    <span class="ico">♜</span>
+                    <span>Student Grade</span>
+                </a>
+
+                <a class="nav-link" href="create-assessment-secure.html">
+                    <span class="ico">＋</span>
+                    <span>Create Assessment</span>
+                </a>
+
+                <a class="nav-link active" href="notes-lectures-secure.html">
+                    <span class="ico">▤</span>
+                    <span>Notes & Lectures</span>
+                </a>
+
+                
+
+                <a class="nav-link" href="apply-leave-secure.html">
+                    <span class="ico">▱</span>
+                    <span>Leave </span>
+                </a>
+
+            </nav>
+
+            <div class="bottom">
+                <button class="button" onclick="signOut()">
+                     &nbsp; Sign Out
+                </button>
+            </div>
+
+        </aside>
+
+        <main class="main">
+
+            <header class="top">
+
+                <div class="crumb">
+                    <b>Notes & Lectures</b>
+                </div>
+
+                  <div class="header-actions">
+        <button class="profile-button" id="profileMenuToggle" aria-expanded="false" aria-controls="profileDropdown">
+          <div class="avatar" data-faculty-initials>--</div>
+          <span data-faculty-name>Loading...</span>
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown" aria-label="Profile menu">
+          <button class="profile-menu-item" type="button" id="myProfile">
+            <i class="bi bi-person"></i>My Profile
+          </button>
+          <div class="profile-menu-divider"></div>
+          <button class="profile-menu-item danger" type="button" id="profileLogout" onclick="signOut()">
+            <i class="bi bi-box-arrow-right"></i>Logout
+          </button>
+        </div>
+</div>
+
+            </header>
+
+            <section class="heading">
+
+                <div>
+                    <h1>Notes & Lectures</h1>
+                    
+                </div>
+
+            </section>
+
+            
+            <section class="grid">
+
+              
+                <article class="card form-card">
+
+                    <h2>Upload Material</h2>
+
+                    <div class="fields">
+
+                        <div class="field">
+                            <label>Material Type</label>
+
+                            <select id="materialType">
+                                <option value="notes">Lecture Notes</option>
+                                <option value="recording">Recorded Lecture</option>
+                                <option value="reading">Reference / Reading Material</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Course</label>
+
+                            <select id="materialCourse">
+                                <option>Database Management Systems</option>
+                                <option>Data Structure</option>
+                                <option>Full Stack Java Programming</option>
+                                <option>Full Stack Python Programming</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Batch / Section</label>
+
+                            <select id="materialBatch">
+                                <option value="all">All Batches</option>
+                                <option value="a">Batch A</option>
+                                <option value="b">Batch B</option>
+                                <option value="c">Batch C</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Title</label>
+
+                            <input
+                                type="text"
+                                id="materialTitle"
+                                placeholder="e.g. Unit 3 · Normalisation Notes">
+                        </div>
+
+                    </div>
+
+                    <div class="field hidden" id="videoLinkField" style="margin-top:17px;">
+                        <label>Recording Link (optional)</label>
+                        <input type="text" id="materialVideoLink" placeholder="e.g. https://drive.example.com/rec-id">
+                    </div>
+
+                    <div class="field" style="margin-top:17px;">
+
+                        <label>Description / Notes for Students</label>
+
+                        <textarea
+                            id="materialDescription"
+                            rows="3"
+                            placeholder="Briefly describe what this covers.">
+                        </textarea>
+
+                    </div>
+
+                    <div class="field" style="margin-top:17px;">
+
+                        <label>Attach File</label>
+
+                        <div class="drop-zone" id="dropZone">
+                            <i class="bi bi-cloud-arrow-up"></i>
+                            <b>Click to choose a file or drag it here</b>
+                            
+                        </div>
+
+                        <input type="file" id="materialFile" class="hidden">
+
+                        <div id="fileChip"></div>
+
+                    </div>
+
+                    <div class="actions">
+
+                        <button class="secondary" id="cancelUploadBtn">
+                            Cancel
+                        </button>
+
+                        <button class="button" id="submitUploadBtn">
+                            Upload Material
+                        </button>
+
+                    </div>
+
+                </article>
+
+              
+                <aside class="stack">
+
+                    <article class="card">
+
+                        <h2>Your Materials</h2>
+
+                        <div class="metric">
+                            <b id="statTotal">3</b>
+                            <small>Items Uploaded</small>
+                        </div>
+
+                        <div class="metric">
+                            <b id="statRecordings">1</b>
+                            <small>Recorded Lectures</small>
+                        </div>
+
+                    </article>
+
+                    <article class="card">
+
+                        <h2>Recently Uploaded</h2>
+
+                        <div id="materialList">
+
+                            <div class="material type-notes" data-material>
+                                <span class="m-ico"><i class="bi bi-file-earmark-text"></i></span>
+                                <div class="m-body">
+                                    <b>Unit 2 · Indexing & Query Optimisation</b>
+                                    <small>Database Management Systems · All Batches · Uploaded Aug 12</small>
+                                </div>
+                                <div class="m-actions">
+                                    <button class="remove" data-remove>Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="material type-lecture" data-material>
+                                <span class="m-ico"><i class="bi bi-camera-reels"></i></span>
+                                <div class="m-body">
+                                    <b>Full Stack Java · Session 7 Recording</b>
+                                    <small>Full Stack Java Programming · Batch B · Uploaded Aug 10</small>
+                                </div>
+                                <div class="m-actions">
+                                    <button class="remove" data-remove>Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="material type-reading" data-material>
+                                <span class="m-ico"><i class="bi bi-journal-bookmark"></i></span>
+                                <div class="m-body">
+                                    <b>Recommended Reading · Normalisation Chapter</b>
+                                    <small>Database Management Systems · All Batches · Uploaded Aug 6</small>
+                                </div>
+                                <div class="m-actions">
+                                    <button class="remove" data-remove>Remove</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </aside>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    
+    <div class="toast-msg" id="taskToast">✓ Material uploaded</div>
+
+   
+    <script src="faculty-auth.js"></script>
+
+    <script>
+        fillFaculty();
+
+        var toast = document.getElementById("taskToast");
+        var toastTimer;
+
+        function showToast(text) {
+            toast.textContent = "✓ " + text;
+            toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(function () {
+                toast.classList.remove("show");
+            }, 2600);
+        }
+
+        function toggleVisibility(triggerEl, targetEl, showWhen) {
+            function sync() {
+                var shouldShow = typeof showWhen === "function" ? showWhen(triggerEl) : !!triggerEl.checked;
+                targetEl.classList.toggle("hidden", !shouldShow);
+            }
+            triggerEl.addEventListener("change", sync);
+            sync();
+        }
+
+        toggleVisibility(
+            document.getElementById("materialType"),
+            document.getElementById("videoLinkField"),
+            function (el) { return el.value === "recording"; }
+        );
+
+        
+        var dropZone = document.getElementById("dropZone");
+        var fileInput = document.getElementById("materialFile");
+        var fileChip = document.getElementById("fileChip");
+        var selectedFile = null;
+
+        function renderChip() {
+            if (!selectedFile) {
+                fileChip.innerHTML = "";
+                return;
+            }
+            fileChip.innerHTML =
+                '<div class="file-chip">' +
+                    '<i class="bi bi-paperclip"></i>' +
+                    '<span class="file-name">' + selectedFile.name + '</span>' +
+                    '<button type="button" class="file-remove" id="clearFileBtn">✕</button>' +
+                '</div>';
+
+            document.getElementById("clearFileBtn").addEventListener("click", function (e) {
+                e.stopPropagation();
+                selectedFile = null;
+                fileInput.value = "";
+                renderChip();
+            });
+        }
+
+        dropZone.addEventListener("click", function () {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener("change", function () {
+            selectedFile = fileInput.files[0] || null;
+            renderChip();
+        });
+
+        ["dragenter", "dragover"].forEach(function (evt) {
+            dropZone.addEventListener(evt, function (e) {
+                e.preventDefault();
+                dropZone.classList.add("drag");
+            });
+        });
+
+        ["dragleave", "drop"].forEach(function (evt) {
+            dropZone.addEventListener(evt, function (e) {
+                e.preventDefault();
+                dropZone.classList.remove("drag");
+            });
+        });
+
+        dropZone.addEventListener("drop", function (e) {
+            var dropped = e.dataTransfer.files && e.dataTransfer.files[0];
+            if (dropped) {
+                selectedFile = dropped;
+                renderChip();
+            }
+        });
+
+        
+        var materialList = document.getElementById("materialList");
+        var statTotal = document.getElementById("statTotal");
+        var statRecordings = document.getElementById("statRecordings");
+
+        var typeMeta = {
+            notes: { cls: "type-notes", icon: "bi-file-earmark-text" },
+            recording: { cls: "type-lecture", icon: "bi-camera-reels" },
+            reading: { cls: "type-reading", icon: "bi-journal-bookmark" }
+        };
+
+        function refreshStats() {
+            var items = materialList.querySelectorAll("[data-material]");
+            statTotal.textContent = items.length;
+            statRecordings.textContent = materialList.querySelectorAll(".type-lecture").length;
+
+            if (!items.length) {
+                materialList.innerHTML = '<div class="empty-state">No materials uploaded yet.</div>';
+            }
+        }
+
+        materialList.addEventListener("click", function (e) {
+            if (!e.target.matches("[data-remove]")) return;
+            e.target.closest("[data-material]").remove();
+            refreshStats();
+            showToast("Material removed");
+        });
+
+        function addMaterialToList(type, title, courseLine) {
+            var meta = typeMeta[type] || typeMeta.notes;
+            var today = new Date();
+            var dateLabel = today.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+
+            var row = document.createElement("div");
+            row.className = "material " + meta.cls;
+            row.setAttribute("data-material", "");
+            row.innerHTML =
+                '<span class="m-ico"><i class="bi ' + meta.icon + '"></i></span>' +
+                '<div class="m-body">' +
+                    '<b>' + title + '</b>' +
+                    '<small>' + courseLine + ' · Uploaded ' + dateLabel + '</small>' +
+                '</div>' +
+                '<div class="m-actions"><button class="remove" data-remove>Remove</button></div>';
+
+            materialList.prepend(row);
+            refreshStats();
+        }
+
+        document.getElementById("submitUploadBtn").addEventListener("click", function () {
+
+            var type = document.getElementById("materialType").value;
+            var course = document.getElementById("materialCourse").value;
+            var batchSelect = document.getElementById("materialBatch");
+            var batchLabel = batchSelect.options[batchSelect.selectedIndex].text;
+            var titleInput = document.getElementById("materialTitle");
+            var title = titleInput.value.trim() || "Untitled Material";
+
+            if (!selectedFile && !document.getElementById("materialVideoLink").value.trim()) {
+                showToast("Attach a file or add a link first");
+                return;
+            }
+
+            addMaterialToList(type, title, course + " · " + batchLabel);
+            showToast("Material uploaded");
+
+            titleInput.value = "";
+            document.getElementById("materialDescription").value = "";
+            document.getElementById("materialVideoLink").value = "";
+            selectedFile = null;
+            fileInput.value = "";
+            renderChip();
+        });
+
+        document.getElementById("cancelUploadBtn").addEventListener("click", function () {
+            document.getElementById("materialTitle").value = "";
+            document.getElementById("materialDescription").value = "";
+            document.getElementById("materialVideoLink").value = "";
+            selectedFile = null;
+            fileInput.value = "";
+            renderChip();
+            showToast("Upload cancelled");
+        });
+    </script>
+
+</body>
+
+</html>
+

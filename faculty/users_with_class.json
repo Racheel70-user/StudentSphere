@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "name": "Leanne Graham",
+    "username": "Bret",
+    "email": "bret@example.com",
+    "address": "Sample Address 1, Sample City",
+    "phone": "9000001001",
+    "class": "A"
+  },
+  {
+    "id": 2,
+    "name": "Ervin Howell",
+    "username": "Antonette",
+    "email": "antonette@example.com",
+    "address": "Sample Address 2, Sample City",
+    "phone": "9000001002",
+    "class": "A"
+  },
+  {
+    "id": 3,
+    "name": "Clementine Bauch",
+    "username": "Samantha",
+    "email": "samantha@example.com",
+    "address": "Sample Address 3, Sample City",
+    "phone": "9000001003",
+    "class": "A"
+  },
+  {
+    "id": 4,
+    "name": "Patricia Lebsack",
+    "username": "Karianne",
+    "email": "karianne@example.com",
+    "address": "Sample Address 4, Sample City",
+    "phone": "9000001004",
+    "class": "B"
+  },
+  {
+    "id": 5,
+    "name": "Chelsey Dietrich",
+    "username": "Kamren",
+    "email": "kamren@example.com",
+    "address": "Sample Address 5, Sample City",
+    "phone": "9000001005",
+    "class": "A"
+  },
+  {
+    "id": 6,
+    "name": "Mrs. Dennis Schulist",
+    "username": "Leopoldo_Corkery",
+    "email": "leopoldo_corkery@example.com",
+    "address": "Sample Address 6, Sample City",
+    "phone": "9000001006",
+    "class": "B"
+  },
+  {
+    "id": 7,
+    "name": "Kurtis Weissnat",
+    "username": "Elwyn.Skiles",
+    "email": "elwynskiles@example.com",
+    "address": "Sample Address 7, Sample City",
+    "phone": "9000001007",
+    "class": "A"
+  },
+  {
+    "id": 8,
+    "name": "Nicholas Runolfsdottir V",
+    "username": "Maxime_Nienow",
+    "email": "maxime_nienow@example.com",
+    "address": "Sample Address 8, Sample City",
+    "phone": "9000001008",
+    "class": "B"
+  },
+  {
+    "id": 9,
+    "name": "Glenna Reichert",
+    "username": "Delphine",
+    "email": "delphine@example.com",
+    "address": "Sample Address 9, Sample City",
+    "phone": "9000001009",
+    "class": "B"
+  },
+  {
+    "id": 10,
+    "name": "Clementina DuBuque",
+    "username": "Moriah.Stanton",
+    "email": "moriahstanton@example.com",
+    "address": "Sample Address 10, Sample City",
+    "phone": "9000001010",
+    "class": "B"
+  },
+  {
+    "id": 11,
+    "name": "Priya Jadhav",
+    "username": "priyajadhav11",
+    "email": "priyajadhav11@example.com",
+    "address": "224 MG Road, Nashik",
+    "phone": "9606464354",
+    "class": "A"
+  },
+  {
+    "id": 12,
+    "name": "Rohan Deshmukh",
+    "username": "rohandeshmukh12",
+    "email": "rohandeshmukh12@example.com",
+    "address": "553 MG Road, Nashik",
+    "phone": "9845399796",
+    "class": "A"
+  },
+  {
+    "id": 13,
+    "name": "Meera Jadhav",
+    "username": "meerajadhav13",
+    "email": "meerajadhav13@example.com",
+    "address": "437 MG Road, Nashik",
+    "phone": "9338183692",
+    "class": "B"
+  },
+  {
+    "id": 14,
+    "name": "Aryan Joshi",
+    "username": "aryanjoshi14",
+    "email": "aryanjoshi14@example.com",
+    "address": "494 MG Road, Nashik",
+    "phone": "9607660065",
+    "class": "A"
+  },
+  {
+    "id": 15,
+    "name": "Riya Singh",
+    "username": "riyasingh15",
+    "email": "riyasingh15@example.com",
+    "address": "375 MG Road, Nashik",
+    "phone": "9382933127",
+    "class": "B"
+  },
+  {
+    "id": 16,
+    "name": "Aryan Kulkarni",
+    "username": "aryankulkarni16",
+    "email": "aryankulkarni16@example.com",
+    "address": "497 MG Road, Nashik",
+    "phone": "9190258021",
+    "class": "B"
+  },
+  {
+    "id": 17,
+    "name": "Rahul Gupta",
+    "username": "rahulgupta17",
+    "email": "rahulgupta17@example.com",
+    "address": "217 MG Road, Nashik",
+    "phone": "9218171065",
+    "class": "A"
+  },
+  {
+    "id": 18,
+    "name": "Rahul Jadhav",
+    "username": "rahuljadhav18",
+    "email": "rahuljadhav18@example.com",
+    "address": "647 MG Road, Nashik",
+    "phone": "9623023653",
+    "class": "B"
+  },
+  {
+    "id": 19,
+    "name": "Aditi Kulkarni",
+    "username": "aditikulkarni19",
+    "email": "aditikulkarni19@example.com",
+    "address": "94 MG Road, Nashik",
+    "phone": "9560502375",
+    "class": "A"
+  },
+  {
+    "id": 20,
+    "name": "Aditya Jadhav",
+    "username": "adityajadhav20",
+    "email": "adityajadhav20@example.com",
+    "address": "56 MG Road, Nashik",
+    "phone": "9632844603",
+    "class": "A"
+  },
+  {
+    "id": 21,
+    "name": "Rohan Sharma",
+    "username": "rohansharma21",
+    "email": "rohansharma21@example.com",
+    "address": "602 MG Road, Nashik",
+    "phone": "9203890390",
+    "class": "A"
+  },
+  {
+    "id": 22,
+    "name": "Vivaan Pawar",
+    "username": "vivaanpawar22",
+    "email": "vivaanpawar22@example.com",
+    "address": "10 MG Road, Nashik",
+    "phone": "9301846222",
+    "class": "B"
+  },
+  {
+    "id": 23,
+    "name": "Aarav Joshi",
+    "username": "aaravjoshi23",
+    "email": "aaravjoshi23@example.com",
+    "address": "823 MG Road, Nashik",
+    "phone": "9446049991",
+    "class": "A"
+  },
+  {
+    "id": 24,
+    "name": "Ananya Deshmukh",
+    "username": "ananyadeshmukh24",
+    "email": "ananyadeshmukh24@example.com",
+    "address": "965 MG Road, Nashik",
+    "phone": "9341598777",
+    "class": "A"
+  },
+  {
+    "id": 25,
+    "name": "Vivaan Pawar",
+    "username": "vivaanpawar25",
+    "email": "vivaanpawar25@example.com",
+    "address": "929 MG Road, Nashik",
+    "phone": "9271172603",
+    "class": "A"
+  },
+  {
+    "id": 26,
+    "name": "Sneha Gupta",
+    "username": "snehagupta26",
+    "email": "snehagupta26@example.com",
+    "address": "325 MG Road, Nashik",
+    "phone": "9239956514",
+    "class": "B"
+  },
+  {
+    "id": 27,
+    "name": "Meera Sharma",
+    "username": "meerasharma27",
+    "email": "meerasharma27@example.com",
+    "address": "723 MG Road, Nashik",
+    "phone": "9652444390",
+    "class": "A"
+  },
+  {
+    "id": 28,
+    "name": "Ishaan Kulkarni",
+    "username": "ishaankulkarni28",
+    "email": "ishaankulkarni28@example.com",
+    "address": "632 MG Road, Nashik",
+    "phone": "9907211103",
+    "class": "B"
+  },
+  {
+    "id": 29,
+    "name": "Ishaan Pawar",
+    "username": "ishaanpawar29",
+    "email": "ishaanpawar29@example.com",
+    "address": "729 MG Road, Nashik",
+    "phone": "9414376611",
+    "class": "A"
+  },
+  {
+    "id": 30,
+    "name": "Pooja Gupta",
+    "username": "poojagupta30",
+    "email": "poojagupta30@example.com",
+    "address": "964 MG Road, Nashik",
+    "phone": "9620563452",
+    "class": "B"
+  },
+  {
+    "id": 31,
+    "name": "Sahil Sharma",
+    "username": "sahilsharma31",
+    "email": "sahilsharma31@example.com",
+    "address": "324 MG Road, Nashik",
+    "phone": "9672599343",
+    "class": "A"
+  },
+  {
+    "id": 32,
+    "name": "Sneha Kulkarni",
+    "username": "snehakulkarni32",
+    "email": "snehakulkarni32@example.com",
+    "address": "158 MG Road, Nashik",
+    "phone": "9105446959",
+    "class": "A"
+  },
+  {
+    "id": 33,
+    "name": "Akash Patel",
+    "username": "akashpatel33",
+    "email": "akashpatel33@example.com",
+    "address": "291 MG Road, Nashik",
+    "phone": "9626099813",
+    "class": "A"
+  },
+  {
+    "id": 34,
+    "name": "Meera Sharma",
+    "username": "meerasharma34",
+    "email": "meerasharma34@example.com",
+    "address": "699 MG Road, Nashik",
+    "phone": "9156062954",
+    "class": "A"
+  },
+  {
+    "id": 35,
+    "name": "Neha Kulkarni",
+    "username": "nehakulkarni35",
+    "email": "nehakulkarni35@example.com",
+    "address": "241 MG Road, Nashik",
+    "phone": "9376643492",
+    "class": "A"
+  },
+  {
+    "id": 36,
+    "name": "Meera Sharma",
+    "username": "meerasharma36",
+    "email": "meerasharma36@example.com",
+    "address": "409 MG Road, Nashik",
+    "phone": "9990336499",
+    "class": "B"
+  },
+  {
+    "id": 37,
+    "name": "Sneha Yadav",
+    "username": "snehayadav37",
+    "email": "snehayadav37@example.com",
+    "address": "831 MG Road, Nashik",
+    "phone": "9979928272",
+    "class": "A"
+  },
+  {
+    "id": 38,
+    "name": "Sneha Yadav",
+    "username": "snehayadav38",
+    "email": "snehayadav38@example.com",
+    "address": "531 MG Road, Nashik",
+    "phone": "9116017236",
+    "class": "B"
+  },
+  {
+    "id": 39,
+    "name": "Karan Jadhav",
+    "username": "karanjadhav39",
+    "email": "karanjadhav39@example.com",
+    "address": "195 MG Road, Nashik",
+    "phone": "9274358045",
+    "class": "A"
+  },
+  {
+    "id": 40,
+    "name": "Sahil Patel",
+    "username": "sahilpatel40",
+    "email": "sahilpatel40@example.com",
+    "address": "279 MG Road, Nashik",
+    "phone": "9638945570",
+    "class": "A"
+  },
+  {
+    "id": 41,
+    "name": "Aarav Patel",
+    "username": "aaravpatel41",
+    "email": "aaravpatel41@example.com",
+    "address": "781 MG Road, Nashik",
+    "phone": "9317693665",
+    "class": "B"
+  },
+  {
+    "id": 42,
+    "name": "Aditi Singh",
+    "username": "aditisingh42",
+    "email": "aditisingh42@example.com",
+    "address": "983 MG Road, Nashik",
+    "phone": "9068910850",
+    "class": "B"
+  },
+  {
+    "id": 43,
+    "name": "Aarav Jadhav",
+    "username": "aaravjadhav43",
+    "email": "aaravjadhav43@example.com",
+    "address": "709 MG Road, Nashik",
+    "phone": "9816279579",
+    "class": "A"
+  },
+  {
+    "id": 44,
+    "name": "Neha Patel",
+    "username": "nehapatel44",
+    "email": "nehapatel44@example.com",
+    "address": "327 MG Road, Nashik",
+    "phone": "9332190154",
+    "class": "A"
+  },
+  {
+    "id": 45,
+    "name": "Ananya Yadav",
+    "username": "ananyayadav45",
+    "email": "ananyayadav45@example.com",
+    "address": "657 MG Road, Nashik",
+    "phone": "9033249779",
+    "class": "B"
+  },
+  {
+    "id": 46,
+    "name": "Pooja Kulkarni",
+    "username": "poojakulkarni46",
+    "email": "poojakulkarni46@example.com",
+    "address": "978 MG Road, Nashik",
+    "phone": "9255855181",
+    "class": "A"
+  },
+  {
+    "id": 47,
+    "name": "Sneha Sharma",
+    "username": "snehasharma47",
+    "email": "snehasharma47@example.com",
+    "address": "922 MG Road, Nashik",
+    "phone": "9427450849",
+    "class": "B"
+  },
+  {
+    "id": 48,
+    "name": "Pooja Joshi",
+    "username": "poojajoshi48",
+    "email": "poojajoshi48@example.com",
+    "address": "309 MG Road, Nashik",
+    "phone": "9724676333",
+    "class": "B"
+  },
+  {
+    "id": 49,
+    "name": "Priya Deshmukh",
+    "username": "priyadeshmukh49",
+    "email": "priyadeshmukh49@example.com",
+    "address": "609 MG Road, Nashik",
+    "phone": "9124252881",
+    "class": "A"
+  },
+  {
+    "id": 50,
+    "name": "Priya Gupta",
+    "username": "priyagupta50",
+    "email": "priyagupta50@example.com",
+    "address": "422 MG Road, Nashik",
+    "phone": "9453546452",
+    "class": "B"
+  },
+  {
+    "id": 51,
+    "name": "Tanvi Kulkarni",
+    "username": "tanvikulkarni51",
+    "email": "tanvikulkarni51@example.com",
+    "address": "647 MG Road, Nashik",
+    "phone": "9014728658",
+    "class": "A"
+  },
+  {
+    "id": 52,
+    "name": "Tanvi Pawar",
+    "username": "tanvipawar52",
+    "email": "tanvipawar52@example.com",
+    "address": "841 MG Road, Nashik",
+    "phone": "9781873875",
+    "class": "A"
+  },
+  {
+    "id": 53,
+    "name": "Priya Pawar",
+    "username": "priyapawar53",
+    "email": "priyapawar53@example.com",
+    "address": "26 MG Road, Nashik",
+    "phone": "9291892377",
+    "class": "A"
+  },
+  {
+    "id": 54,
+    "name": "Priya Deshmukh",
+    "username": "priyadeshmukh54",
+    "email": "priyadeshmukh54@example.com",
+    "address": "813 MG Road, Nashik",
+    "phone": "9611287655",
+    "class": "B"
+  },
+  {
+    "id": 55,
+    "name": "Akash Singh",
+    "username": "akashsingh55",
+    "email": "akashsingh55@example.com",
+    "address": "649 MG Road, Nashik",
+    "phone": "9317827107",
+    "class": "A"
+  },
+  {
+    "id": 56,
+    "name": "Karan Singh",
+    "username": "karansingh56",
+    "email": "karansingh56@example.com",
+    "address": "923 MG Road, Nashik",
+    "phone": "9388674104",
+    "class": "A"
+  },
+  {
+    "id": 57,
+    "name": "Ananya Singh",
+    "username": "ananyasingh57",
+    "email": "ananyasingh57@example.com",
+    "address": "929 MG Road, Nashik",
+    "phone": "9351716933",
+    "class": "B"
+  },
+  {
+    "id": 58,
+    "name": "Neha Singh",
+    "username": "nehasingh58",
+    "email": "nehasingh58@example.com",
+    "address": "571 MG Road, Nashik",
+    "phone": "9841211259",
+    "class": "A"
+  },
+  {
+    "id": 59,
+    "name": "Akash Sharma",
+    "username": "akashsharma59",
+    "email": "akashsharma59@example.com",
+    "address": "831 MG Road, Nashik",
+    "phone": "9825087373",
+    "class": "A"
+  },
+  {
+    "id": 60,
+    "name": "Vivaan Sharma",
+    "username": "vivaansharma60",
+    "email": "vivaansharma60@example.com",
+    "address": "143 MG Road, Nashik",
+    "phone": "9033638631",
+    "class": "B"
+  },
+  {
+    "id": 61,
+    "name": "Nikhil Pawar",
+    "username": "nikhilpawar61",
+    "email": "nikhilpawar61@example.com",
+    "address": "659 MG Road, Nashik",
+    "phone": "9726081812",
+    "class": "B"
+  },
+  {
+    "id": 62,
+    "name": "Sneha Joshi",
+    "username": "snehajoshi62",
+    "email": "snehajoshi62@example.com",
+    "address": "575 MG Road, Nashik",
+    "phone": "9368054924",
+    "class": "B"
+  },
+  {
+    "id": 63,
+    "name": "Akash Sharma",
+    "username": "akashsharma63",
+    "email": "akashsharma63@example.com",
+    "address": "163 MG Road, Nashik",
+    "phone": "9008184911",
+    "class": "A"
+  },
+  {
+    "id": 64,
+    "name": "Ishaan Jadhav",
+    "username": "ishaanjadhav64",
+    "email": "ishaanjadhav64@example.com",
+    "address": "651 MG Road, Nashik",
+    "phone": "9908366193",
+    "class": "A"
+  },
+  {
+    "id": 65,
+    "name": "Aditya Joshi",
+    "username": "adityajoshi65",
+    "email": "adityajoshi65@example.com",
+    "address": "290 MG Road, Nashik",
+    "phone": "9942078449",
+    "class": "A"
+  },
+  {
+    "id": 66,
+    "name": "Aarav Pawar",
+    "username": "aaravpawar66",
+    "email": "aaravpawar66@example.com",
+    "address": "698 MG Road, Nashik",
+    "phone": "9566087057",
+    "class": "A"
+  },
+  {
+    "id": 67,
+    "name": "Aryan Yadav",
+    "username": "aryanyadav67",
+    "email": "aryanyadav67@example.com",
+    "address": "611 MG Road, Nashik",
+    "phone": "9344988280",
+    "class": "A"
+  },
+  {
+    "id": 68,
+    "name": "Aditi Singh",
+    "username": "aditisingh68",
+    "email": "aditisingh68@example.com",
+    "address": "928 MG Road, Nashik",
+    "phone": "9428275942",
+    "class": "A"
+  },
+  {
+    "id": 69,
+    "name": "Karan Sharma",
+    "username": "karansharma69",
+    "email": "karansharma69@example.com",
+    "address": "776 MG Road, Nashik",
+    "phone": "9502155621",
+    "class": "A"
+  },
+  {
+    "id": 70,
+    "name": "Pooja Deshmukh",
+    "username": "poojadeshmukh70",
+    "email": "poojadeshmukh70@example.com",
+    "address": "447 MG Road, Nashik",
+    "phone": "9359150712",
+    "class": "A"
+  },
+  {
+    "id": 71,
+    "name": "Sahil Joshi",
+    "username": "sahiljoshi71",
+    "email": "sahiljoshi71@example.com",
+    "address": "173 MG Road, Nashik",
+    "phone": "9545883752",
+    "class": "B"
+  },
+  {
+    "id": 72,
+    "name": "Aditya Kulkarni",
+    "username": "adityakulkarni72",
+    "email": "adityakulkarni72@example.com",
+    "address": "158 MG Road, Nashik",
+    "phone": "9896862520",
+    "class": "B"
+  },
+  {
+    "id": 73,
+    "name": "Rohan Jadhav",
+    "username": "rohanjadhav73",
+    "email": "rohanjadhav73@example.com",
+    "address": "720 MG Road, Nashik",
+    "phone": "9601877452",
+    "class": "A"
+  },
+  {
+    "id": 74,
+    "name": "Akash Deshmukh",
+    "username": "akashdeshmukh74",
+    "email": "akashdeshmukh74@example.com",
+    "address": "747 MG Road, Nashik",
+    "phone": "9347698618",
+    "class": "B"
+  },
+  {
+    "id": 75,
+    "name": "Priya Pawar",
+    "username": "priyapawar75",
+    "email": "priyapawar75@example.com",
+    "address": "148 MG Road, Nashik",
+    "phone": "9295484619",
+    "class": "A"
+  },
+  {
+    "id": 76,
+    "name": "Vivaan Sharma",
+    "username": "vivaansharma76",
+    "email": "vivaansharma76@example.com",
+    "address": "197 MG Road, Nashik",
+    "phone": "9017594188",
+    "class": "B"
+  },
+  {
+    "id": 77,
+    "name": "Aarav Patel",
+    "username": "aaravpatel77",
+    "email": "aaravpatel77@example.com",
+    "address": "791 MG Road, Nashik",
+    "phone": "9562768506",
+    "class": "A"
+  },
+  {
+    "id": 78,
+    "name": "Neha Yadav",
+    "username": "nehayadav78",
+    "email": "nehayadav78@example.com",
+    "address": "320 MG Road, Nashik",
+    "phone": "9300895674",
+    "class": "A"
+  },
+  {
+    "id": 79,
+    "name": "Aarav Gupta",
+    "username": "aaravgupta79",
+    "email": "aaravgupta79@example.com",
+    "address": "212 MG Road, Nashik",
+    "phone": "9054803739",
+    "class": "B"
+  },
+  {
+    "id": 80,
+    "name": "Ananya Yadav",
+    "username": "ananyayadav80",
+    "email": "ananyayadav80@example.com",
+    "address": "498 MG Road, Nashik",
+    "phone": "9369318367",
+    "class": "A"
+  },
+  {
+    "id": 81,
+    "name": "Meera Jadhav",
+    "username": "meerajadhav81",
+    "email": "meerajadhav81@example.com",
+    "address": "743 MG Road, Nashik",
+    "phone": "9503991088",
+    "class": "B"
+  },
+  {
+    "id": 82,
+    "name": "Priya Kulkarni",
+    "username": "priyakulkarni82",
+    "email": "priyakulkarni82@example.com",
+    "address": "566 MG Road, Nashik",
+    "phone": "9183372893",
+    "class": "A"
+  },
+  {
+    "id": 83,
+    "name": "Aditi Sharma",
+    "username": "aditisharma83",
+    "email": "aditisharma83@example.com",
+    "address": "593 MG Road, Nashik",
+    "phone": "9926317853",
+    "class": "B"
+  },
+  {
+    "id": 84,
+    "name": "Sneha Yadav",
+    "username": "snehayadav84",
+    "email": "snehayadav84@example.com",
+    "address": "846 MG Road, Nashik",
+    "phone": "9751778925",
+    "class": "B"
+  },
+  {
+    "id": 85,
+    "name": "Riya Singh",
+    "username": "riyasingh85",
+    "email": "riyasingh85@example.com",
+    "address": "128 MG Road, Nashik",
+    "phone": "9681168395",
+    "class": "A"
+  },
+  {
+    "id": 86,
+    "name": "Tanvi Singh",
+    "username": "tanvisingh86",
+    "email": "tanvisingh86@example.com",
+    "address": "874 MG Road, Nashik",
+    "phone": "9032990212",
+    "class": "B"
+  },
+  {
+    "id": 87,
+    "name": "Sahil Yadav",
+    "username": "sahilyadav87",
+    "email": "sahilyadav87@example.com",
+    "address": "698 MG Road, Nashik",
+    "phone": "9878473109",
+    "class": "B"
+  },
+  {
+    "id": 88,
+    "name": "Riya Patel",
+    "username": "riyapatel88",
+    "email": "riyapatel88@example.com",
+    "address": "804 MG Road, Nashik",
+    "phone": "9193724343",
+    "class": "A"
+  },
+  {
+    "id": 89,
+    "name": "Aditya Gupta",
+    "username": "adityagupta89",
+    "email": "adityagupta89@example.com",
+    "address": "772 MG Road, Nashik",
+    "phone": "9761702281",
+    "class": "B"
+  },
+  {
+    "id": 90,
+    "name": "Akash Pawar",
+    "username": "akashpawar90",
+    "email": "akashpawar90@example.com",
+    "address": "601 MG Road, Nashik",
+    "phone": "9542651182",
+    "class": "A"
+  },
+  {
+    "id": 91,
+    "name": "Priya Gupta",
+    "username": "priyagupta91",
+    "email": "priyagupta91@example.com",
+    "address": "944 MG Road, Nashik",
+    "phone": "9808613457",
+    "class": "A"
+  },
+  {
+    "id": 92,
+    "name": "Pooja Pawar",
+    "username": "poojapawar92",
+    "email": "poojapawar92@example.com",
+    "address": "216 MG Road, Nashik",
+    "phone": "9705483542",
+    "class": "A"
+  },
+  {
+    "id": 93,
+    "name": "Tanvi Jadhav",
+    "username": "tanvijadhav93",
+    "email": "tanvijadhav93@example.com",
+    "address": "380 MG Road, Nashik",
+    "phone": "9760569032",
+    "class": "A"
+  },
+  {
+    "id": 94,
+    "name": "Meera Deshmukh",
+    "username": "meeradeshmukh94",
+    "email": "meeradeshmukh94@example.com",
+    "address": "252 MG Road, Nashik",
+    "phone": "9259716820",
+    "class": "A"
+  },
+  {
+    "id": 95,
+    "name": "Aryan Gupta",
+    "username": "aryangupta95",
+    "email": "aryangupta95@example.com",
+    "address": "217 MG Road, Nashik",
+    "phone": "9302264095",
+    "class": "A"
+  },
+  {
+    "id": 96,
+    "name": "Riya Pawar",
+    "username": "riyapawar96",
+    "email": "riyapawar96@example.com",
+    "address": "903 MG Road, Nashik",
+    "phone": "9669599673",
+    "class": "A"
+  },
+  {
+    "id": 97,
+    "name": "Aryan Yadav",
+    "username": "aryanyadav97",
+    "email": "aryanyadav97@example.com",
+    "address": "997 MG Road, Nashik",
+    "phone": "9036464615",
+    "class": "A"
+  },
+  {
+    "id": 98,
+    "name": "Racheel Kolhe",
+    "username": "Racheel",
+    "email": "racheelkolhe70@gmail.com",
+    "address": "Aditya Tower, Tuljabhavani Nagar, Panchvati, Nashik",
+    "phone": "7709661306",
+    "class": "A"
+  },
+  {
+    "id": 99,
+    "name": "Prajwal Pawar",
+    "username": "prajwal",
+    "email": "prajwalpawar12@gmail.com",
+    "address": "Vidyavikas Circle, Nashik",
+    "phone": "8010947069",
+    "class": "A"
+  },
+  {
+    "id": 100,
+    "name": "Harshal Sawant",
+    "username": "harshal",
+    "email": "harshalsawant@gmail.com",
+    "address": "Vidyavikas Circle, Nashik",
+    "phone": "7666754903",
+    "class": "B"
+  }
+]

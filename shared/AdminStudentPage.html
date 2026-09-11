@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stud - Student Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0b1220;
+      --surface:#111b2e;
+      --surface-2:#162238;
+      --line:rgba(148,163,184,.14);
+      --text:#eef4ff;
+      --muted:#94a3b8;
+      --blue:#3b82f6;
+      --cyan:#22d3ee;
+      --green:#34d399;
+      --amber:#fbbf24;
+      --red:#fb7185;
+      --radius:18px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      min-width:320px;
+      color:var(--text);
+      background:var(--bg);
+      font:14px/1.45 "DM Sans",system-ui,sans-serif;
+      overflow-x:hidden;
+    }
+    body:before {
+      content:"";
+      position:fixed;
+      z-index:-2;
+      inset:0;
+      background:
+        radial-gradient(circle at 77% -5%,rgba(37,99,235,.18),transparent 29%),
+        radial-gradient(circle at 0 70%,rgba(6,182,212,.09),transparent 24%),
+        var(--bg);
+    }
+    button,input,select,textarea { font:inherit; }
+    button { border:0; }
+    .app { min-height:100vh; }
+    .sidebar {
+      position:fixed;
+      inset:0 auto 0 0;
+      z-index:1035;
+      width:270px;
+      display:flex;
+      flex-direction:column;
+      padding:24px 15px 18px;
+      background:rgba(10,17,30,.86);
+      border-right:1px solid var(--line);
+      backdrop-filter:blur(18px);
+      transition:width .28s ease,transform .28s ease;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:11px;
+      padding:0 10px 25px;
+      font:700 21px/1 "Outfit",sans-serif;
+      letter-spacing:-.6px;
+      color:#fff;
+      text-decoration:none;
+    }
+    .brand-mark {
+      width:31px;
+      height:31px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      background:linear-gradient(135deg,#3b82f6,#22d3ee);
+      box-shadow:0 7px 22px rgba(59,130,246,.36);
+    }
+    .brand-mark i { font-size:18px; }
+    .nav-label {
+      margin:0 10px 8px;
+      color:#63738c;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+    }
+    .sidebar-nav {
+      display:grid;
+      gap:3px;
+      overflow:auto;
+      scrollbar-width:none;
+    }
+    .sidebar-nav::-webkit-scrollbar { display:none; }
+    .nav-link {
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:13px;
+      min-height:43px;
+      padding:0 12px;
+      border-radius:12px;
+      color:#a9b7ca;
+      text-decoration:none;
+      font-weight:500;
+      white-space:nowrap;
+      transition:.18s ease;
+    }
+    .nav-link i {
+      width:18px;
+      font-size:17px;
+      text-align:center;
+    }
+    .nav-link:hover {
+      color:#f3f8ff;
+      background:rgba(148,163,184,.08);
+      transform:translateX(2px);
+    }
+    .nav-link.active {
+      color:#fff;
+      background:linear-gradient(90deg,rgba(59,130,246,.25),rgba(59,130,246,.08));
+      box-shadow:inset 2px 0 #60a5fa;
+    }
+    .nav-link.active i { color:#60a5fa; }
+    .avatar {
+      position:relative;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#fbbf24,#f97316);
+      color:#422006;
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 0 0 2px rgba(251,191,36,.15);
+    }
+    .avatar:after {
+      content:"";
+      position:absolute;
+      right:0;
+      bottom:1px;
+      width:9px;
+      height:9px;
+      border:2px solid #152137;
+      border-radius:50%;
+      background:#34d399;
+    }
+    .main {
+      min-width:0;
+      margin-left:270px;
+      padding:0 28px 28px;
+      transition:margin .28s ease;
+    }
+    .topbar {
+      position:sticky;
+      z-index:1020;
+      top:0;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:18px;
+      min-height:88px;
+      padding:14px 0;
+      background:linear-gradient(180deg,rgba(11,18,32,.98) 72%,rgba(11,18,32,0));
+      backdrop-filter:blur(9px);
+    }
+    .topbar-actions {
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .search-block {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(30,41,59,.58);
+    }
+    .search {
+      position:relative;
+      width:190px;
+      min-width:190px;
+    }
+    .search i {
+      position:absolute;
+      top:50%;
+      left:13px;
+      color:#7d90aa;
+      transform:translateY(-50%);
+    }
+    .search input {
+      width:100%;
+      height:40px;
+      padding:0 14px 0 37px;
+      border:1px solid transparent;
+      border-radius:11px;
+      outline:0;
+      color:var(--text);
+      background:rgba(30,41,59,.8);
+      transition:.2s;
+    }
+    .search input:focus {
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 3px rgba(59,130,246,.12);
+    }
+    .department-filter {
+      min-width:170px;
+      height:40px;
+      padding:0 12px;
+      border:1px solid transparent;
+      border-radius:11px;
+      color:var(--text);
+      background:rgba(30,41,59,.8);
+      outline:0;
+    }
+    .department-filter:focus {
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 3px rgba(59,130,246,.12);
+    }
+    .sort-btn {
+      min-width:86px;
+      height:40px;
+      padding:0 12px;
+      border-radius:11px;
+      border:1px solid var(--line);
+      color:#cbd8e8;
+      background:rgba(30,41,59,.58);
+      transition:.18s ease;
+    }
+    .sort-btn:hover {
+      border-color:rgba(96,165,250,.45);
+      color:#f5f9ff;
+      transform:translateY(-1px);
+    }
+    .sort-btn.active {
+      color:#fff;
+      border-color:rgba(96,165,250,.55);
+      background:linear-gradient(135deg,rgba(59,130,246,.24),rgba(34,211,238,.12));
+      box-shadow:0 10px 18px rgba(59,130,246,.14);
+    }
+    .icon-btn {
+      display:grid;
+      place-items:center;
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      color:#b9c7db;
+      background:rgba(30,41,59,.58);
+      transition:.2s;
+      cursor:pointer;
+    }
+    .icon-btn:hover {
+      color:#fff;
+      border-color:rgba(96,165,250,.45);
+      transform:translateY(-2px);
+    }
+    .profile-menu { position:relative; }
+    .profile-button {
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:4px 10px 4px 4px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      color:#d8e4f5;
+      background:rgba(30,41,59,.58);
+      cursor:pointer;
+    }
+    .profile-button .avatar {
+      width:30px;
+      height:30px;
+      font-size:10px;
+    }
+    .profile-button .avatar:after { display:none; }
+    .profile-button span {
+      font-size:12px;
+      font-weight:600;
+    }
+    .profile-dropdown {
+      position:absolute;
+      top:calc(100% + 8px);
+      right:0;
+      width:220px;
+      padding:7px;
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:14px;
+      background:rgba(16,27,46,.95);
+      box-shadow:0 18px 42px rgba(0,0,0,.36);
+      backdrop-filter:blur(18px);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transform:translateY(-7px) scale(.98);
+      transform-origin:top right;
+      transition:opacity .18s ease,transform .18s ease,visibility .18s;
+      z-index:1100;
+    }
+    .profile-dropdown.open {
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translateY(0) scale(1);
+    }
+    .profile-menu-item {
+      display:flex;
+      width:100%;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+      border-radius:9px;
+      color:#cbd8e8;
+      background:transparent;
+      font-size:12px;
+      font-weight:600;
+      text-align:left;
+      transition:.17s ease;
+      cursor:pointer;
+    }
+    .profile-menu-item:hover,
+    .profile-menu-item:focus {
+      color:#f5f9ff;
+      background:rgba(96,165,250,.14);
+      outline:0;
+    }
+    .profile-menu-item i:first-child {
+      width:16px;
+      color:#8eb8ff;
+      font-size:14px;
+      text-align:center;
+    }
+    .profile-menu-item.danger i:first-child { color:#fb7185; }
+    .profile-menu-divider {
+      height:1px;
+      margin:5px 3px;
+      background:var(--line);
+    }
+    .page {
+      display:grid;
+      gap:18px;
+      padding-bottom:18px;
+    }
+    .panel {
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      color:inherit;
+      background:linear-gradient(145deg,rgba(24,36,56,.84),rgba(15,26,43,.94));
+      box-shadow:0 10px 30px rgba(0,0,0,.16);
+    }
+    .panel:before {
+      content:"";
+      position:absolute;
+      pointer-events:none;
+      inset:0;
+      opacity:.42;
+      background:linear-gradient(115deg,rgba(255,255,255,.07),transparent 28%);
+    }
+    .toolbar {
+      padding:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .sort-stack {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .table-panel {
+      padding:0;
+      overflow:hidden;
+    }
+    .table-wrap {
+      width:100%;
+      overflow:auto;
+    }
+    table {
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+    }
+    thead th {
+      position:sticky;
+      top:0;
+      z-index:2;
+      padding:16px 18px;
+      text-align:left;
+      color:#8fa1ba;
+      font-size:11px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      background:rgba(17,27,46,.95);
+      border-bottom:1px solid var(--line);
+    }
+    tbody td {
+      padding:15px 18px;
+      border-bottom:1px solid rgba(148,163,184,.08);
+      color:#dce7f6;
+      vertical-align:middle;
+    }
+    tbody tr:hover { background:rgba(48,111,202,.09); }
+    .serial {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:36px;
+      height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      color:#8fe8fb;
+      background:rgba(6,182,212,.12);
+      font-size:12px;
+      font-weight:700;
+    }
+    .name-cell {
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+    }
+    .name-cell strong {
+      color:#f3f8ff;
+      font-size:14px;
+      font-weight:600;
+    }
+    .name-cell span {
+      color:var(--muted);
+      font-size:11px;
+    }
+    .badge-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      border:1px solid rgba(96,165,250,.25);
+      color:#8cc8ff;
+      background:rgba(59,130,246,.12);
+      font-size:12px;
+      font-weight:600;
+    }
+    .badge-pill.green {
+      border-color:rgba(52,211,153,.24);
+      color:#7ff0c0;
+      background:rgba(52,211,153,.12);
+    }
+    .action-buttons {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .small-btn {
+      min-width:72px;
+      height:34px;
+      padding:0 12px;
+      border-radius:10px;
+      color:#eff6ff;
+      background:rgba(59,130,246,.2);
+      transition:.18s ease;
+    }
+    .small-btn:hover { transform:translateY(-1px); }
+    .small-btn.secondary {
+      color:#d6e3f6;
+      background:rgba(148,163,184,.12);
+    }
+    .small-btn.danger {
+      color:#ffd4dd;
+      background:rgba(251,113,133,.14);
+    }
+    .empty-state {
+      display:none;
+      padding:44px 20px;
+      text-align:center;
+      color:var(--muted);
+    }
+    .empty-state.show { display:block; }
+    .empty-state .icon {
+      display:grid;
+      place-items:center;
+      width:72px;
+      height:72px;
+      margin:0 auto 14px;
+      border-radius:22px;
+      color:#8eb8ff;
+      background:rgba(59,130,246,.13);
+      font-size:30px;
+    }
+    .empty-state h3 {
+      margin:0 0 8px;
+      color:#eef4ff;
+      font:600 18px/1 "Outfit",sans-serif;
+    }
+    .modal-backdrop-custom {
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      display:none;
+      place-items:center;
+      padding:16px;
+      background:rgba(3,9,18,.76);
+      backdrop-filter:blur(6px);
+    }
+    .modal-backdrop-custom.open { display:grid; }
+    .modal-panel-custom {
+      width:min(980px,calc(100vw - 24px));
+      max-height:calc(100vh - 32px);
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.16);
+      border-radius:22px;
+      background:linear-gradient(145deg,rgba(20,31,50,.98),rgba(15,24,39,.98));
+      box-shadow:0 28px 80px rgba(0,0,0,.48);
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-panel-custom.details-panel { width:min(760px,calc(100vw - 24px)); }
+    .modal-panel-custom.delete-panel { width:min(660px,calc(100vw - 24px)); }
+    .modal-head {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+    .modal-head h2 {
+      margin:0;
+      font:600 21px/1.1 "Outfit",sans-serif;
+      letter-spacing:-.3px;
+    }
+    .modal-head p {
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .close-btn {
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      color:#d7e4f7;
+      background:rgba(148,163,184,.08);
+    }
+    .modal-body {
+      padding:18px;
+      overflow:auto;
+    }
+    .form-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .form-field {
+      display:grid;
+      gap:7px;
+    }
+    .form-field.full { grid-column:1 / -1; }
+    .form-field label {
+      color:#c7d5e7;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width:100%;
+      height:44px;
+      padding:0 13px;
+      border:1px solid rgba(148,163,184,.14);
+      border-radius:12px;
+      color:var(--text);
+      background:rgba(30,41,59,.6);
+      outline:0;
+    }
+    .form-field textarea {
+      height:auto;
+      min-height:94px;
+      padding:12px 13px;
+      resize:none;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color:rgba(96,165,250,.6);
+      box-shadow:0 0 0 3px rgba(59,130,246,.12);
+    }
+    .form-hint {
+      color:#7f92aa;
+      font-size:11px;
+    }
+    .form-error {
+      display:none;
+      margin-top:2px;
+      padding:10px 12px;
+      border-radius:11px;
+      border:1px solid rgba(251,113,133,.22);
+      color:#ffd4dd;
+      background:rgba(251,113,133,.12);
+      font-size:12px;
+    }
+    .form-error.show { display:block; }
+    .form-actions {
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:16px;
+    }
+    .primary-btn,
+    .secondary-btn {
+      height:42px;
+      padding:0 16px;
+      border-radius:12px;
+      color:#fff;
+      font-weight:700;
+      transition:.18s ease;
+    }
+    .primary-btn {
+      background:linear-gradient(135deg,#3b82f6,#22d3ee);
+      box-shadow:0 8px 16px rgba(59,130,246,.18);
+    }
+    .secondary-btn {
+      border:1px solid rgba(148,163,184,.16);
+      background:rgba(148,163,184,.08);
+    }
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform:translateY(-1px);
+    }
+    .detail-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .detail-item {
+      padding:14px;
+      border:1px solid rgba(148,163,184,.12);
+      border-radius:14px;
+      background:rgba(148,163,184,.04);
+    }
+    .detail-label {
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .detail-value {
+      color:#fff;
+      font-weight:600;
+      word-break:break-word;
+    }
+    .detail-full {
+      grid-column:1 / -1;
+    }
+    .delete-banner {
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:16px;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(251,113,133,.18);
+      background:rgba(251,113,133,.1);
+      color:#ffd4dd;
+    }
+    .delete-banner i {
+      font-size:20px;
+      color:#fb7185;
+      margin-top:2px;
+    }
+    .delete-actions {
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:18px;
+    }
+    .toast-msg {
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:2200;
+      display:none;
+      max-width:min(360px,calc(100vw - 36px));
+      padding:12px 14px;
+      border:1px solid rgba(52,211,153,.18);
+      border-radius:12px;
+      color:#e8fff7;
+      background:rgba(9,22,31,.94);
+      box-shadow:0 18px 42px rgba(0,0,0,.32);
+    }
+    .toast-msg.show { display:block; }
+    @media (max-width: 1100px) {
+      .main { margin-left:0; }
+      .sidebar { transform:translateX(-100%); }
+      .sidebar.open { transform:translateX(0); }
+    }
+    @media (max-width: 900px) {
+      .form-grid,
+      .detail-grid { grid-template-columns:1fr; }
+      .search { width:100%; min-width:0; }
+      .department-filter { width:100%; min-width:0; }
+      .search-block { width:100%; }
+    }
+    @media (max-width: 720px) {
+      .main { padding:0 14px 18px; }
+      .topbar { min-height:74px; gap:10px; }
+      .topbar-actions { width:100%; justify-content:stretch; }
+      .search-block { width:100%; }
+      .sort-stack { width:100%; }
+      .sort-btn { flex:1 1 0; }
+      thead th, tbody td { padding-left:12px; padding-right:12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+        <span>Stud</span>
+      </a>
+      
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="/admin-dashboard/index.html"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a>
+        <a class="nav-link active" href="/shared/AdminStudentPage.html"><i class="bi bi-people"></i><span>Students</span></a>
+        <a class="nav-link" href="/shared/StudentHomePage.html"><i class="bi bi-person-workspace"></i><span>Profile</span></a>
+        <a class="nav-link" href="/courses/index.html"><i class="bi bi-journal-bookmark"></i><span>Courses</span></a>
+        <a class="nav-link" href="/fees/index.html"><i class="bi bi-wallet2"></i><span>Fees</span></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-actions">
+          <div class="profile-menu">
+            <button class="profile-button" id="profileMenuToggle" aria-expanded="false" aria-controls="profileDropdown" type="button">
+              <div class="avatar">AD</div>
+              <span>Admin Desk</span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="profile-dropdown" id="profileDropdown">
+              <button class="profile-menu-item" type="button" id="myProfile"><i class="bi bi-person"></i>My Profile</button>
+              <div class="profile-menu-divider"></div>
+              <button class="profile-menu-item danger" type="button" id="profileLogout"><i class="bi bi-box-arrow-right"></i>Logout</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page">
+        <div class="panel toolbar">
+          <div class="search-block">
+            <div class="search">
+              <i class="bi bi-search"></i>
+              <input type="text" id="searchInput" placeholder="Search roll no or name">
+            </div>
+            <select id="departmentFilter" class="department-filter" aria-label="Department filter">
+              <option value="all">All Departments</option>
+            </select>
+          </div>
+          <div class="sort-stack">
+            <button class="sort-btn" type="button" id="sortAZ">Sort A-Z</button>
+            <button class="sort-btn" type="button" id="sortZA">Sort Z-A</button>
+            <button class="primary-btn" type="button" id="openAddStudent">
+              <i class="bi bi-plus-lg me-1"></i> Add Student
+            </button>
+          </div>
+        </div>
+
+        <div class="panel table-panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:9%;">S.No</th>
+                  <th style="width:23%;">Name</th>
+                  <th style="width:16%;">Department</th>
+                  <th style="width:12%;">Division</th>
+                  <th style="width:24%;">Email</th>
+                  <th style="width:16%;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentRows"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="emptyState">
+            <div class="icon"><i class="bi bi-search"></i></div>
+            <h3>No Students Found</h3>
+            <p>Try a different search or department filter.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop-custom" id="addModal">
+    <div class="modal-panel-custom">
+      <div class="modal-head">
+        <div>
+          <h2>Add New Student</h2>
+          <p>Details save permanently to MongoDB after submission.</p>
+        </div>
+        <button class="close-btn" type="button" id="closeAddModal"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="studentForm">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="rollNo">Roll No</label>
+              <input type="number" id="rollNo" min="1" required placeholder="e.g. 1">
+            </div>
+            <div class="form-field">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" required placeholder="e.g. Aaryan Kumar">
+            </div>
+            <div class="form-field">
+              <label for="dob">DOB</label>
+              <input type="text" id="dob" required placeholder="DD/MM/YYYY" maxlength="10">
+              <span class="form-hint">Use DD/MM/YYYY format.</span>
+            </div>
+            <div class="form-field">
+              <label for="collegeName">College Name</label>
+              <input type="text" id="collegeName" required placeholder="e.g. Stud Institute">
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" required placeholder="name@gmail.com">
+              <span class="form-hint">Gmail only.</span>
+            </div>
+            <div class="form-field">
+              <label for="phoneNumber">Phone Number</label>
+              <input type="text" id="phoneNumber" required placeholder="10 digit number" maxlength="10" inputmode="numeric">
+              <span class="form-hint">India-coded 10 digit number only.</span>
+            </div>
+            <div class="form-field">
+              <label for="department">Department</label>
+              <input type="text" id="department" list="departmentOptions" required placeholder="e.g. CSE">
+              <datalist id="departmentOptions"></datalist>
+            </div>
+            <div class="form-field">
+              <label for="division">Division</label>
+              <select id="division" required>
+                <option value="">Select division</option>
+                <option value="A">Division A</option>
+                <option value="B">Division B</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label for="address">Address</label>
+              <textarea id="address" required placeholder="Full address"></textarea>
+            </div>
+          </div>
+          <div class="form-error" id="formError"></div>
+          <div class="form-actions">
+            <button class="secondary-btn" type="button" id="cancelAdd">Cancel</button>
+            <button class="primary-btn" type="submit">Save Student</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop-custom" id="detailsModal">
+    <div class="modal-panel-custom details-panel">
+      <div class="modal-head">
+        <div>
+          <h2>Student Details</h2>
+          <p>Full record pulled directly from MongoDB.</p>
+        </div>
+        <button class="close-btn" type="button" id="closeDetailsModal"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-grid" id="detailsContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop-custom" id="deleteModal">
+    <div class="modal-panel-custom delete-panel">
+      <div class="modal-head">
+        <div>
+          <h2>Confirm Delete</h2>
+          <p>Please review the student record before removing it from MongoDB.</p>
+        </div>
+        <button class="close-btn" type="button" id="closeDeleteModal"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="delete-banner">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <div>
+            <strong>Double-check this action.</strong>
+            <div>This will permanently delete the selected student.</div>
+          </div>
+        </div>
+        <div class="detail-grid" id="deleteDetails"></div>
+        <div class="delete-actions">
+          <button class="secondary-btn" type="button" id="cancelDelete">Cancel</button>
+          <button class="primary-btn" type="button" id="confirmDelete">Delete Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-msg" id="toastMsg"></div>
+
+  <script>
+    const API_URL = "http://localhost:3000/api/students";
+
+    const sidebar = document.getElementById("sidebar");
+    const searchInput = document.getElementById("searchInput");
+    const departmentFilter = document.getElementById("departmentFilter");
+    const studentRows = document.getElementById("studentRows");
+    const emptyState = document.getElementById("emptyState");
+    const formError = document.getElementById("formError");
+    const departmentOptions = document.getElementById("departmentOptions");
+    const addModal = document.getElementById("addModal");
+    const detailsModal = document.getElementById("detailsModal");
+    const deleteModal = document.getElementById("deleteModal");
+    const detailsContent = document.getElementById("detailsContent");
+    const deleteDetails = document.getElementById("deleteDetails");
+    const profileDropdown = document.getElementById("profileDropdown");
+    const profileMenuToggle = document.getElementById("profileMenuToggle");
+    const toastMsg = document.getElementById("toastMsg");
+    const sortAZ = document.getElementById("sortAZ");
+    const sortZA = document.getElementById("sortZA");
+
+    const form = document.getElementById("studentForm");
+    const inputs = {
+      rollNo: document.getElementById("rollNo"),
+      fullName: document.getElementById("fullName"),
+      dob: document.getElementById("dob"),
+      collegeName: document.getElementById("collegeName"),
+      email: document.getElementById("email"),
+      phoneNumber: document.getElementById("phoneNumber"),
+      department: document.getElementById("department"),
+      division: document.getElementById("division"),
+      address: document.getElementById("address")
+    };
+
+    let students = [];
+    let activeSort = null;
+    let pendingDeleteStudent = null;
+
+    const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[ch]);
+
+    const normalize = (value) => String(value ?? "").trim();
+
+    const openModal = (modal) => modal.classList.add("open");
+    const closeModal = (modal) => modal.classList.remove("open");
+
+    const showToast = (message) => {
+      toastMsg.textContent = message;
+      toastMsg.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toastMsg.classList.remove("show"), 2600);
+    };
+
+    const resetSortButtons = (target) => {
+      [sortAZ, sortZA].forEach((button) => button.classList.remove("active"));
+      if (target) {
+        target.classList.add("active");
+      }
+    };
+
+    const updateDepartmentChoices = () => {
+      const current = departmentFilter.value;
+      const options = [...new Set(students.map((student) => normalize(student.department)).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+      departmentOptions.innerHTML = options.map((department) => `<option value="${escapeHtml(department)}"></option>`).join("");
+
+      departmentFilter.innerHTML = `<option value="all">All Departments</option>` + options
+        .map((department) => `<option value="${escapeHtml(department)}">${escapeHtml(department)}</option>`)
+        .join("");
+
+      departmentFilter.value = options.includes(current) ? current : "all";
+    };
+
+    const compareStudents = (a, b) => {
+      if (activeSort === "az") {
+        return a.fullName.localeCompare(b.fullName);
+      }
+      if (activeSort === "za") {
+        return b.fullName.localeCompare(a.fullName);
+      }
+      return 0;
+    };
+
+    const getFilteredStudents = () => {
+      const term = normalize(searchInput.value).toLowerCase();
+      const department = departmentFilter.value;
+
+      const list = students
+        .filter((student) => {
+          const inDepartment = department === "all" || normalize(student.department) === department;
+          const matchesSearch = !term ||
+            String(student.rollNo).includes(term) ||
+            normalize(student.fullName).toLowerCase().includes(term);
+          return inDepartment && matchesSearch;
+        })
+        .slice();
+
+      if (activeSort) {
+        list.sort(compareStudents);
+      }
+
+      return list;
+    };
+
+    const renderStudents = () => {
+      const list = getFilteredStudents();
+      studentRows.innerHTML = "";
+
+      list.forEach((student, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><span class="serial">${index + 1}</span></td>
+          <td>
+            <div class="name-cell">
+              <strong>${escapeHtml(student.fullName)}</strong>
+              <span>Roll No: ${escapeHtml(student.rollNo)} | DOB: ${escapeHtml(student.dob)}</span>
+            </div>
+          </td>
+          <td><span class="badge-pill">${escapeHtml(student.department)}</span></td>
+          <td><span class="badge-pill green">${escapeHtml(student.division)}</span></td>
+          <td>${escapeHtml(student.email)}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="small-btn secondary" type="button" data-action="view" data-id="${student._id}">View</button>
+              <button class="small-btn danger" type="button" data-action="delete" data-id="${student._id}">Delete</button>
+            </div>
+          </td>
+        `;
+        studentRows.appendChild(row);
+      });
+
+      emptyState.classList.toggle("show", list.length === 0);
+    };
+
+    const refreshStudents = async () => {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error("Failed to load students from MongoDB");
+      }
+      students = await response.json();
+      updateDepartmentChoices();
+      renderStudents();
+    };
+
+    const validateStudent = () => {
+      const rollNo = normalize(inputs.rollNo.value);
+      const fullName = normalize(inputs.fullName.value);
+      const dob = normalize(inputs.dob.value);
+      const collegeName = normalize(inputs.collegeName.value);
+      const email = normalize(inputs.email.value).toLowerCase();
+      const phoneNumber = normalize(inputs.phoneNumber.value);
+      const department = normalize(inputs.department.value);
+      const division = normalize(inputs.division.value);
+      const address = normalize(inputs.address.value);
+
+      if (!rollNo || !fullName || !dob || !collegeName || !email || !phoneNumber || !department || !division || !address) {
+        return "All fields are required.";
+      }
+      if (!/^\d+$/.test(rollNo)) {
+        return "Roll number must contain digits only.";
+      }
+      if (!/^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(dob)) {
+        return "DOB must be in DD/MM/YYYY format.";
+      }
+      if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
+        return "Email must be a Gmail address.";
+      }
+      if (!/^\d{10}$/.test(phoneNumber)) {
+        return "Phone number must be exactly 10 digits.";
+      }
+
+      const duplicate = students.some((student) =>
+        String(student.rollNo) === rollNo &&
+        normalize(student.department).toLowerCase() === department.toLowerCase() &&
+        normalize(student.division).toLowerCase() === division.toLowerCase()
+      );
+
+      if (duplicate) {
+        return "That roll number already exists in this department and division.";
+      }
+
+      return {
+        rollNo: Number(rollNo),
+        fullName,
+        dob,
+        collegeName,
+        email,
+        phoneNumber,
+        department,
+        division,
+        address
+      };
+    };
+
+    const openAddStudentModal = () => {
+      form.reset();
+      formError.classList.remove("show");
+      openModal(addModal);
+    };
+
+    const openStudentDetails = (student) => {
+      detailsContent.innerHTML = `
+        <div class="detail-item">
+          <span class="detail-label">Roll No</span>
+          <span class="detail-value">${escapeHtml(student.rollNo)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Full Name</span>
+          <span class="detail-value">${escapeHtml(student.fullName)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">DOB</span>
+          <span class="detail-value">${escapeHtml(student.dob)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">College Name</span>
+          <span class="detail-value">${escapeHtml(student.collegeName)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Email</span>
+          <span class="detail-value">${escapeHtml(student.email)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Phone Number</span>
+          <span class="detail-value">${escapeHtml(student.phoneNumber)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Department</span>
+          <span class="detail-value">${escapeHtml(student.department)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Division</span>
+          <span class="detail-value">${escapeHtml(student.division)}</span>
+        </div>
+        <div class="detail-item detail-full">
+          <span class="detail-label">Address</span>
+          <span class="detail-value">${escapeHtml(student.address)}</span>
+        </div>
+      `;
+      openModal(detailsModal);
+    };
+
+    const openDeleteConfirm = (student) => {
+      pendingDeleteStudent = student;
+      deleteDetails.innerHTML = `
+        <div class="detail-item">
+          <span class="detail-label">Roll No</span>
+          <span class="detail-value">${escapeHtml(student.rollNo)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Full Name</span>
+          <span class="detail-value">${escapeHtml(student.fullName)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Department</span>
+          <span class="detail-value">${escapeHtml(student.department)}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Division</span>
+          <span class="detail-value">${escapeHtml(student.division)}</span>
+        </div>
+        <div class="detail-item detail-full">
+          <span class="detail-label">Email</span>
+          <span class="detail-value">${escapeHtml(student.email)}</span>
+        </div>
+      `;
+      openModal(deleteModal);
+    };
+
+    searchInput.addEventListener("input", renderStudents);
+    departmentFilter.addEventListener("change", renderStudents);
+
+    sortAZ.addEventListener("click", () => {
+      activeSort = activeSort === "az" ? null : "az";
+      if (activeSort === "az") {
+        sortZA.classList.remove("active");
+        sortAZ.classList.add("active");
+      } else {
+        sortAZ.classList.remove("active");
+      }
+      renderStudents();
+    });
+
+    sortZA.addEventListener("click", () => {
+      activeSort = activeSort === "za" ? null : "za";
+      if (activeSort === "za") {
+        sortAZ.classList.remove("active");
+        sortZA.classList.add("active");
+      } else {
+        sortZA.classList.remove("active");
+      }
+      renderStudents();
+    });
+
+    studentRows.addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) {
+        return;
+      }
+
+      const student = students.find((item) => item._id === button.dataset.id);
+      if (!student) {
+        return;
+      }
+
+      if (button.dataset.action === "view") {
+        openStudentDetails(student);
+      }
+
+      if (button.dataset.action === "delete") {
+        openDeleteConfirm(student);
+      }
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      formError.classList.remove("show");
+
+      const payload = validateStudent();
+      if (typeof payload === "string") {
+        formError.textContent = payload;
+        formError.classList.add("show");
+        return;
+      }
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        formError.textContent = result.message || "Failed to save student";
+        formError.classList.add("show");
+        return;
+      }
+
+      closeModal(addModal);
+      await refreshStudents();
+      showToast("Student saved to MongoDB");
+    });
+
+    const openAddStudentButton = document.getElementById("openAddStudent");
+    if (openAddStudentButton) {
+      openAddStudentButton.addEventListener("click", openAddStudentModal);
+    }
+    document.getElementById("cancelAdd").addEventListener("click", () => closeModal(addModal));
+    document.getElementById("closeAddModal").addEventListener("click", () => closeModal(addModal));
+    document.getElementById("closeDetailsModal").addEventListener("click", () => closeModal(detailsModal));
+    const dismissDeleteModal = () => {
+      pendingDeleteStudent = null;
+      closeModal(deleteModal);
+    };
+    document.getElementById("closeDeleteModal").addEventListener("click", dismissDeleteModal);
+    document.getElementById("cancelDelete").addEventListener("click", dismissDeleteModal);
+    document.getElementById("confirmDelete").addEventListener("click", async () => {
+      if (!pendingDeleteStudent) {
+        closeModal(deleteModal);
+        return;
+      }
+
+      const response = await fetch(`${API_URL}/${pendingDeleteStudent._id}`, { method: "DELETE" });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        showToast(payload.message || "Failed to delete student");
+        return;
+      }
+
+      pendingDeleteStudent = null;
+      closeModal(deleteModal);
+      await refreshStudents();
+      showToast("Student deleted");
+    });
+
+    addModal.addEventListener("click", (event) => {
+      if (event.target === addModal) {
+        closeModal(addModal);
+      }
+    });
+
+    detailsModal.addEventListener("click", (event) => {
+      if (event.target === detailsModal) {
+        closeModal(detailsModal);
+      }
+    });
+
+    deleteModal.addEventListener("click", (event) => {
+      if (event.target === deleteModal) {
+        dismissDeleteModal();
+      }
+    });
+
+    profileMenuToggle.addEventListener("click", () => {
+      profileDropdown.classList.toggle("open");
+      profileMenuToggle.setAttribute("aria-expanded", profileDropdown.classList.contains("open") ? "true" : "false");
+    });
+
+    document.getElementById("myProfile").addEventListener("click", () => {
+      profileDropdown.classList.remove("open");
+      showToast("Profile panel ready");
+    });
+
+    document.getElementById("profileLogout").addEventListener("click", () => {
+      profileDropdown.classList.remove("open");
+      showToast("Logout action can be wired later");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!profileDropdown.contains(event.target) && !profileMenuToggle.contains(event.target)) {
+        profileDropdown.classList.remove("open");
+        profileMenuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    window.StudentAdminPage = {
+      openAddStudentModal,
+      refreshStudents
+    };
+
+    refreshStudents().catch((error) => {
+      showToast(error.message || "Unable to load students");
+    });
+  </script>
+</body>
+</html>
+

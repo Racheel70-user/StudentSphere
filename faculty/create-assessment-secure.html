@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Assessment | Stud</title>
+
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="faculty-portal.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<style>
+     .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 30px;
+            font: 700 22px/1 "Outfit", sans-serif;
+            letter-spacing: -.6px;
+            color: #fff;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            box-shadow: 0 7px 22px rgba(59, 130, 246, .36);
+            color: #071019;
+            font-size: 16px;
+        }
+
+        .toast-msg {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            z-index: 1100;
+            transform: translate(-50%, 20px);
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: #111b2e;
+            border: 1px solid rgba(52, 211, 153, .35);
+            color: #34d399;
+            font: 600 12px "DM Sans", sans-serif;
+            box-shadow: 0 15px 40px #0008;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+    
+        body { overflow-x: hidden; }
+
+        .profile-button,
+        .profile-menu-item {
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: none;
+            outline: 0;
+            cursor: pointer;
+        }
+
+        .profile-menu-item {
+            border: 0;
+            background: transparent;
+        }
+
+        .side {
+            width: 270px;
+            height: auto;
+            top: 0;
+            bottom: 0;
+            padding: 24px 15px 18px;
+        }
+
+        .main {
+            margin-left: 270px;
+            padding: 24px 28px 28px;
+        }
+
+        .side .bottom .button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            color: #fca5a5;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            background: rgba(30, 41, 59, .58);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .side .bottom .button:hover {
+            background: rgba(251, 113, 133, .12);
+            border-color: rgba(251, 113, 133, .4);
+        }
+
+      
+        .card h2 {
+            margin-top: 0;
+        }
+</style>
+
+<body>
+
+    <div class="app">
+
+        
+        <aside class="side">
+
+          
+             <div class="brand">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            Stud
+        </div>
+                    <nav class="sidebar-nav">
+
+                <a class="nav-link " href="faculty-portal-secure.html">
+                    <span class="ico">▦</span>
+                    <span>Home Page</span>
+                </a>
+
+                <a class="nav-link" href="mark-attendance-secure.html">
+                    <span class="ico">▥</span>
+                    <span>Student Attendance</span>
+                </a>
+
+                <a class="nav-link" href="review-grading-secure.html">
+                    <span class="ico">♜</span>
+                    <span>Student Grade</span>
+                </a>
+
+                <a class="nav-link active" href="create-assessment-secure.html">
+                    <span class="ico">＋</span>
+                    <span>Create Assessment</span>
+                </a>
+
+                <a class="nav-link" href="notes-lectures-secure.html">
+                    <span class="ico">▤</span>
+                    <span>Notes & Lectures</span>
+                </a>
+
+                
+
+                <a class="nav-link" href="apply-leave-secure.html">
+                    <span class="ico">▱</span>
+                    <span>Leave </span>
+                </a>
+
+            </nav>
+
+            <div class="bottom">
+                <button class="button" onclick="signOut()">
+                     &nbsp; Sign Out
+                </button>
+            </div>
+
+        </aside>
+
+     
+        <main class="main">
+
+         
+            <header class="top">
+
+                <div class="crumb">
+                   <b>Create Assessment</b>
+                </div>
+
+                  <div class="header-actions">
+        <button class="profile-button" id="profileMenuToggle" aria-expanded="false" aria-controls="profileDropdown">
+          <div class="avatar" data-faculty-initials>--</div>
+          <span data-faculty-name>Loading...</span>
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown" aria-label="Profile menu">
+          <button class="profile-menu-item" type="button" id="myProfile">
+            <i class="bi bi-person"></i>My Profile
+          </button>
+          <div class="profile-menu-divider"></div>
+          <button class="profile-menu-item danger" type="button" id="profileLogout" onclick="signOut()">
+            <i class="bi bi-box-arrow-right"></i>Logout
+          </button>
+        </div>
+        </div>
+
+            </header>
+
+            <section class="heading">
+
+                <div>
+                    <h1>Create Assessment</h1>
+                 
+                </div>
+
+            </section>
+
+           
+            <article class="card form-card-1">
+
+                <h2>Assessment Details</h2>
+
+                <div class="fields">
+
+                    <div class="field">
+                        <label>Assessment Type</label>
+
+                        <select>
+                            <option>Assignment</option>
+                            <option>Quiz</option>
+                            <option>Examination</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Course</label>
+
+                        <select>
+                            <option>Database Management Systems</option>
+                            <option>Data Structure</option>
+                            <option>Full Stack Java Programming</option>
+                            <option>Full Stack Python Programming</option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Assessment Title</label>
+
+                        <input
+                            type="text"
+                            placeholder="e.g. Assignment 4 · SQL Normalisation">
+                    </div>
+
+                    <div class="field">
+                        <label>Total Marks</label>
+
+                        <input
+                            type="number"
+                            placeholder="30"
+                            min="0"
+                            max="30">
+                    </div>
+
+                    <div class="field">
+                        <label>Batch / Section</label>
+
+                        <select id="batchSelect">
+                            <option value="all">All Batches</option>
+                            <option value="a">Batch A</option>
+                            <option value="b">Batch B</option>
+                            <option value="c">Batch C</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Open Date</label>
+
+                        <input type="date">
+                    </div>
+
+                    <div class="field">
+                        <label>Due Date</label>
+
+                        <input type="date">
+                    </div>
+
+                    <div class="field">
+                        <label>Time Limit (minutes)</label>
+
+                        <input
+                            type="number"
+                            id="timeLimitInput"
+                            placeholder="e.g. 60"
+                            min="0">
+                    </div>
+
+                    <div class="field">
+                        <label>Delivery Mode</label>
+
+                        <select id="deliveryModeSelect">
+                            <option value="offline">In-Person</option>
+                            <option value="online">Online</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="field hidden" id="meetingLinkField" style="margin-top:17px;">
+                    <label>Online Meeting / Proctoring Link</label>
+                    <input type="text" placeholder="e.g. https://meet.example.com/room-id">
+                </div>
+
+                <div class="field" style="margin-top:17px;">
+
+                    <label>Description / Intro for Students</label>
+
+                    <textarea
+                        id="assessmentNotes"
+                        rows="4"
+                        style="width:100%; resize:vertical; background:#0b1526; border:1px solid rgba(148,163,184,.2); border-radius:8px; color:#eef4ff; font:400 12px 'DM Sans', sans-serif; padding:8px 10px;"></textarea>
+
+                </div>
+
+                <div class="section-label">
+                    Advanced Options
+           
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-copy">
+                        <b>Auto-submit when time expires</b>
+                      
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="autoTerminateToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-copy">
+                        <b>Allow re-exam / re-attempt</b>
+                     
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="reExamToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-extra hidden" id="reExamExtra">
+                    <div class="field">
+                        <label>Max Attempts</label>
+                        <input type="number" id="maxAttemptsInput" min="1" placeholder="e.g. 2">
+                    </div>
+                    <div class="field">
+                        <label>Cooldown Before Re-attempt (hours)</label>
+                        <input type="number" id="reExamCooldownInput" min="0" placeholder="e.g. 24">
+                    </div>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-copy">
+                        <b>Auto-generate certificate</b>
+                       
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="certificateToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-extra hidden" id="certificateExtra">
+                    <div class="field">
+                        <label>Minimum Passing Score (%)</label>
+                        <input type="number" id="certificateThresholdInput" min="0" max="100" placeholder="e.g. 70">
+                    </div>
+                </div>
+
+                <div class="actions">
+
+                    <button class="secondary" id="saveDraftBtn">
+                        Save as Draft
+                    </button>
+
+                    <button class="button" id="publishAssessmentBtn">
+                        Publish Assessment
+                    </button>
+
+                </div>
+
+            </article>
+
+        </main>
+
+    </div>
+
+
+    <div class="toast-msg" id="taskToast">✓ Assessment published</div>
+
+    <script src="faculty-auth.js"></script>
+
+    <script>
+        fillFaculty();
+
+        var toast = document.getElementById("taskToast");
+        var toastTimer;
+
+        function showToast(text) {
+            toast.textContent = "✓ " + text;
+            toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(function () {
+                toast.classList.remove("show");
+            }, 2600);
+        }
+
+        document.getElementById("publishAssessmentBtn").addEventListener("click", function () {
+            showToast("Assessment published");
+        });
+
+        document.getElementById("saveDraftBtn").addEventListener("click", function () {
+            showToast("Assessment saved as draft");
+        });
+
+        function toggleVisibility(triggerEl, targetEl, showWhen) {
+            function sync() {
+                var shouldShow = typeof showWhen === "function" ? showWhen(triggerEl) : !!triggerEl.checked;
+                targetEl.classList.toggle("hidden", !shouldShow);
+            }
+            triggerEl.addEventListener("change", sync);
+            sync();
+        }
+
+        toggleVisibility(
+            document.getElementById("deliveryModeSelect"),
+            document.getElementById("meetingLinkField"),
+            function (el) { return el.value === "online"; }
+        );
+
+        toggleVisibility(
+            document.getElementById("reExamToggle"),
+            document.getElementById("reExamExtra")
+        );
+
+        toggleVisibility(
+            document.getElementById("certificateToggle"),
+            document.getElementById("certificateExtra")
+        );
+    </script>
+
+</body>
+
+</html>
+

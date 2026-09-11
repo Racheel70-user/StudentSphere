@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stud - Principal Fee Section</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page-role="principal">
+<div class="app-shell">
+    <header class="portal-topbar">
+        <div class="portal-title">
+            <div class="brand fee-brand">
+                <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+                <span>Stud</span>
+            </div>
+        </div>
+        <div class="portal-actions">
+            <div class="top-profile" onclick="toggleProfilePopupRight()">
+                <div class="avatar" id="topAvatar">P</div>
+                <div class="info"><span class="name" id="topName">Prashant</span><span class="role" id="topRole">Principal</span></div>
+                <i class="fas fa-chevron-down" id="profileArrowRight"></i>
+                <div class="profile-popup-right" id="profilePopupRight">
+                    <div class="popup-item" onclick="showProfilePage()"><i class="fas fa-user"></i>My Profile</div>
+                    <div class="divider"></div>
+                    <div class="popup-item logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i>Logout</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="portal-main">
+        <section class="page active">
+            <div class="cards">
+                <div class="card"><div class="card-icon green"><i class="fas fa-check-circle"></i></div><div class="card-info"><h3>Collected</h3><p id="feeCollected">₹0</p></div></div>
+                <div class="card"><div class="card-icon orange"><i class="fas fa-clock"></i></div><div class="card-info"><h3>Pending</h3><p id="feePending">₹0</p></div></div>
+                <div class="card"><div class="card-icon blue"><i class="fas fa-users"></i></div><div class="card-info"><h3>Total Students</h3><p id="feeTotalStudents">0</p></div></div>
+            </div>
+            <div class="role-intro-card"><h2><i class="fas fa-user-tie"></i> Principal Fee Section</h2><p>Overview of collected and pending fees with direct access to student records.</p></div>
+            <div class="fee-table-section">
+                <div class="fee-table-header"><h2><i class="fas fa-list-ul"></i> Fee Records</h2></div>
+                <div class="table-wrapper">
+                    <table class="fee-table">
+                        <thead><tr><th>Student</th><th>Email</th><th>Total</th><th>Paid</th><th>Pending</th><th class="due-date-column">Due Date</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody id="feesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<div id="popup" class="popup"><div class="popup-content"><span class="close" onclick="closePopup()">&times;</span><div id="popupData"></div></div></div>
+<script src="data.js"></script><script src="student.js"></script><script src="faculty.js"></script><script src="principal.js"></script><script src="script.js"></script>
+</body>
+</html>
+
